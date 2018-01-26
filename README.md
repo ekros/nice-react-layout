@@ -9,6 +9,11 @@ yarn add nice-react-layout
 ## Motivation
 The aim of this project is to have a reduced set of components to create flexbox-based layouts abstracting the knowledge needed to understand how flexbox works.
 
+## Features
+- Easy to learn: Just combine layouts and panels.
+- Create collapsible sidebars with ease.
+- Automagically colorize panels with random colors to speed-up prototyping.
+- Resizable panels. Just add separators to your layouts.
 
 ## Basic Usage
 Creating a simple layout is as easy as this:
