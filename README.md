@@ -15,7 +15,7 @@ The aim of this project is to have a reduced set of components to create flexbox
 - Automagically colorize panels with random colors to speed-up prototyping.
 - Resizable panels. Just add separators to your layouts.
 
-![Simple example](https://raw.github.com/ekros/nice-react-layout/master/preview.png)
+![Simple example](https://raw.github.com/ekros/nice-react-layout/master/preview.gif)
 
 ## Basic Usage
 Creating a simple layout is as easy as this:
