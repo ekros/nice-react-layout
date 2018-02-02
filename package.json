@@ -5,14 +5,18 @@
   "repository": "git@github.com:ekros/nice-react-layout.git",
   "author": "Eric Ros <ericrosbh@gmail.com>",
   "main": "build/index.js",
+  "homepage": "https://ekros.github.io/nice-react-layout",
   "scripts": {
     "start": "node scripts/start.js",
     "build": "node scripts/build.js",
     "demo": "node scripts/demo.js",
-    "test": "node scripts/test.js --env=jsdom"
+    "test": "node scripts/test.js --env=jsdom",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   },
   "license": "MIT",
   "dependencies": {
+    "gh-pages": "^1.1.0",
     "underscore": "^1.8.3"
   },
   "devDependencies": {
