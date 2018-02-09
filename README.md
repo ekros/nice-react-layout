@@ -38,6 +38,7 @@ In both horizontal and vertical layouts add the prop 'proportion' with the propo
 ```
 <br />
 Do you want to add a separator between both panels? Use the Separator component:
+
 ```javascript
   <HorizontalLayout mockup>
     <Panel proportion={1} />
@@ -47,6 +48,7 @@ Do you want to add a separator between both panels? Use the Separator component:
 ```
 <br />
 You can nest layouts. Let's add a vertical layout, with its own Separator, inside the right panel:
+
 ```javascript
   <HorizontalLayout mockup>
     <Panel proportion={1} />
