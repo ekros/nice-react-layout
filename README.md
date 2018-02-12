@@ -63,7 +63,7 @@ You can nest layouts. Let's add a vertical layout, with its own Separator, insid
   </HorizontalLayout>
 ```
 
-For a complete example with every feature, see the Example.js file.
+For a complete example with every feature, see the src/demo/App.js file. Or just run `yarn start`.
 
 ## Components
 ### HorizontalLayout
