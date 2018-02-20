@@ -4,7 +4,7 @@
   "description": "Create complex and nice Flexbox-based layouts, without even knowing what flexbox means",
   "repository": "git@github.com:ekros/nice-react-layout.git",
   "author": "Eric Ros <ericrosbh@gmail.com>",
-  "main": "src/lib/index.js",
+  "main": "build/index.js",
   "homepage": "https://ekros.github.io/nice-react-layout",
   "scripts": {
     "start": "node scripts/start.js",
