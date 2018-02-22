@@ -8,6 +8,7 @@ import {
   FormLayout,
   TableLayout
 } from "./components/Layout";
+import { View } from "./components/View";
 
 export {
   Layout,
@@ -17,5 +18,6 @@ export {
   Separator,
   Spacer,
   FormLayout,
-  TableLayout
+  TableLayout,
+  View,
 };

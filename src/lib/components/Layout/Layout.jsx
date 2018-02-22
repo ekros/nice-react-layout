@@ -165,13 +165,13 @@ export default class Layout extends React.Component {
 				cursor: draggingSeparator ? "col-resize" : "default",
 				display: "flex",
 				flexDirection: reverse ? "row-reverse" : "row",
-				height: "100vh",
+				height: "100%",
 			},
 			verticalLayout: {
 				cursor: draggingSeparator ? "row-resize" : "default",
 				display: "flex",
 				flexDirection: reverse ? "column-reverse" : "column",
-				height: "100vh",
+				height: "100%",
 			},
 		};
 		let panelIndex = 0;

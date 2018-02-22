@@ -6,7 +6,10 @@ import {
 	Separator,
 	Spacer,
 } from "../lib/components/Layout";
+import { View } from "../lib/components/View";
 import { FormLayout, TableLayout } from "../lib/components/Layout/panel_layouts";
+
+import "./App.css";
 
 class App extends Component {
 	render() {
@@ -38,53 +41,55 @@ class App extends Component {
 			},
 		};
 		return (
-			<HorizontalLayout mockup collapseSize="60px">
-				<Panel
-					proportion={1}
-					sidebar
-					collapsible
-					collapseButtonStyle={styles.collapseButton}
-				>
-					<VerticalLayout mockup separatorsRefreshInterval={200}>
-						<Panel fixed fixedHeight={100}>
-							Top nested fixed panel
-						</Panel>
-						<Separator />
-						<Panel proportion={2}>
-							Center nested panel. The separator below has a refresh rate of
-							200ms.
-						</Panel>
-						<Separator />
-						<Panel minHeight={200} proportion={1} centered>
-							<div style={styles.exampleContent}>Example centered content</div>
-						</Panel>
-					</VerticalLayout>
-				</Panel>
-				{/* If you double-click this separator it will give a size of 200px to the left panel */}
-				<Separator defaultDblClickPos={200} />
-				<Panel proportion={2}>
-					<TableLayout
-						topBarComponent={<div style={styles.tableTop}>This is a TableLayout...</div>}
-						bottomTableComponent={
-							<div style={styles.tableBottom}>...with topBarComponent and bottomTableComponent</div>
-						}
-					/>
-				</Panel>
-				{/* Use Spacer to add a blank space to the layout (it may help in positioning other elements) */}
-				<Spacer size={50} />
-				<Panel proportion={1}>
-					{/* You can add a mockup prop for quick table prototyping */}
-					<TableLayout mockup />
-				</Panel>
-				<Separator defaultDblClickPos={200} />
-				<Panel proportion={1}>
-					<FormLayout mockup />
-				</Panel>
-				<Separator />
-				<Panel fixed fixedWidth={300} centered>
-					Fixed panel. I can't be resized.
-				</Panel>
-			</HorizontalLayout>
+			<View>
+				<HorizontalLayout mockup collapseSize="60px">
+					<Panel
+						proportion={1}
+						sidebar
+						collapsible
+						collapseButtonStyle={styles.collapseButton}
+					>
+						<VerticalLayout mockup separatorsRefreshInterval={200}>
+							<Panel fixed fixedHeight={100}>
+								Top nested fixed panel
+							</Panel>
+							<Separator />
+							<Panel proportion={2}>
+								Center nested panel. The separator below has a refresh rate of
+								200ms.
+							</Panel>
+							<Separator />
+							<Panel minHeight={200} proportion={1} centered>
+								<div style={styles.exampleContent}>Example centered content</div>
+							</Panel>
+						</VerticalLayout>
+					</Panel>
+					{/* If you double-click this separator it will give a size of 200px to the left panel */}
+					<Separator defaultDblClickPos={200} />
+					<Panel proportion={2}>
+						<TableLayout
+							topBarComponent={<div style={styles.tableTop}>This is a TableLayout...</div>}
+							bottomTableComponent={
+								<div style={styles.tableBottom}>...with topBarComponent and bottomTableComponent</div>
+							}
+						/>
+					</Panel>
+					{/* Use Spacer to add a blank space to the layout (it may help in positioning other elements) */}
+					<Spacer size={50} />
+					<Panel proportion={1}>
+						{/* You can add a mockup prop for quick table prototyping */}
+						<TableLayout mockup />
+					</Panel>
+					<Separator defaultDblClickPos={200} />
+					<Panel proportion={1}>
+						<FormLayout mockup />
+					</Panel>
+					<Separator />
+					<Panel fixed fixedWidth={300} centered>
+						Fixed panel. I can't be resized.
+					</Panel>
+				</HorizontalLayout>
+			</View>
 		);
 	}
 }
