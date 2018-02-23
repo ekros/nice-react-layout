@@ -7,7 +7,7 @@ yarn add nice-react-layout
 ```
 
 ## Motivation
-The aim of this project is to have a reduced set of components to create flexbox-based layouts abstracting the knowledge needed to understand how flexbox works.
+The aim of this project is to have a reduced set of components to create flexbox-based layouts abstracting the knowledge needed to understand how flexbox works. This library is very useful for web apps with lots of panels.
 
 ## Features
 - Easy to learn: Just combine layouts and panels.
@@ -27,7 +27,17 @@ Creating a simple layout is as easy as this:
   </HorizontalLayout>
 ```
 
-It renders an horizontal layout with two panels of the same size (they have proportion=1 by default). Thanks to the 'mockup' prop it paints every panel with a random color, easing the layout prototyping process.
+It renders an horizontal layout with two panels of the same size (they have proportion=1 by default). Thanks to the 'mockup' prop it paints every panel with a random color, easing the layout prototyping process. Layouts get all the available space by default (in the parent element). If you want your layout to fill the viewport you can use the <View> component. Like this:
+
+```javascript
+  <View>
+    <HorizontalLayout mockup>
+      <Panel />
+      <Panel />
+    </HorizontalLayout>
+  </View>
+```
+
 <br />
 In both horizontal and vertical layouts add the prop 'proportion' with the proportional part it takes from the available space. This example creates a typical sidebar + content layout:
 ```javascript
@@ -66,6 +76,14 @@ You can nest layouts. Let's add a vertical layout, with its own Separator, insid
 For a complete example with every feature, see the src/demo/App.js file. Or just run `yarn start`.
 
 ## Components
+### View
+The top-level component. It gets all the available viewport space. Use it if you want your layout to fill the viewport or pass width / height props.
+##### Props
+| Prop          | Description                                |
+| ------------- | ------------------------------------------ |
+| width         | view width (100vw by default)              |
+| height        | view height (100vh by default)             |
+
 ### HorizontalLayout
 It creates an horizontal layout. This is shorthand component for:
 ```javascript
