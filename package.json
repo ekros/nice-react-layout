@@ -12,7 +12,7 @@
     "demo": "node scripts/demo.js",
     "test": "node scripts/test.js --env=jsdom",
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d build"
+    "deploy": "gh-pages -d demo"
   },
   "license": "MIT",
   "dependencies": {
