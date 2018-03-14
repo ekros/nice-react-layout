@@ -49,18 +49,10 @@ export default class Layout extends React.Component {
 			totalSpacerSize,
 		};
 		this.collapsePanel = this.collapsePanel.bind(this);
-		this.handleResize = this.handleResize.bind(this);
 		this.handleSeparatorMouseMove = this.handleSeparatorMouseMove.bind(this);
 		this.handleSeparatorMouseUp = this.handleSeparatorMouseUp.bind(this);
 		this.onSeparatorDoubleClick = this.onSeparatorDoubleClick.bind(this);
 		this.onSeparatorMouseDown = this.onSeparatorMouseDown.bind(this);
-	}
-
-	componentDidMount() {
-		window.addEventListener("resize", this.handleResize);
-	}
-	componentWillUnmount() {
-		window.removeEventListener("resize", this.handleResize);
 	}
 
 	collapsePanel(layoutIndex) {
@@ -72,10 +64,6 @@ export default class Layout extends React.Component {
 				collapsedPanels: _.reject(collapsedPanels, p => p === layoutIndex),
 			});
 		}
-	}
-	handleResize() {
-		// TODO: save current sizes?? use sizeme or similar?? should be the layout size not the window!
-		this.forceUpdate();
 	}
 	onSeparatorDoubleClick(draggingSeparatorIndex, defaultDblClickPos) {
 		this.setState({ draggingSeparatorIndex }, () => {
@@ -94,6 +82,10 @@ export default class Layout extends React.Component {
 	}
 	handleSeparatorMouseMove(e) {
 		const { orientation, reverse, separatorsRefreshInterval } = this.props;
+		const rect = this.layout.getBoundingClientRect();
+		const { top, left, width, height } = rect;
+		console.log("rect", rect);
+		console.log("e", e);
 		const {
 			draggingSeparatorIndex,
 			isBusyOnDragging,
@@ -102,40 +94,53 @@ export default class Layout extends React.Component {
 			totalFixedHeight,
 			totalSpacerSize,
 		} = this.state;
+		console.log("layout", layout);
 		const newLayout = layout.slice(0);
 		if (!isBusyOnDragging) {
 			let separatorPos;
 			if (reverse) {
 				separatorPos =
 					orientation === "vertical"
-						? window.innerHeight - e.pageY
-						: window.innerWidth - e.pageX; // TODO: not the window!!
+						? height - e.layerY
+						: width - e.layerX;
 			} else {
-				separatorPos = orientation === "vertical" ? e.pageY : e.pageX;
+				separatorPos = orientation === "vertical" ? e.pageY - top : e.pageX - left;
 			}
+
+			// separator pos limits
+			if (separatorPos <= 0) {
+				separatorPos = 1;
+			} else if (separatorPos >= width) {
+				separatorPos = width;
+			}
+
 			let flexUnitsSum = 0;
 			let currentFlexValue = 0;
-			// TODO: is not the window size and do not refresh on resize!
+			console.log("separatorPos", separatorPos);
 			const layoutSize =
 				orientation === "vertical"
-					? window.innerHeight - totalFixedHeight - totalSpacerSize
-					: window.innerWidth - totalFixedWidth - totalSpacerSize;
+					? height - totalFixedHeight - totalSpacerSize
+					: width - totalFixedWidth - totalSpacerSize;
+			console.log("layoutSize", layoutSize);
 			newLayout.forEach(panel => {
 				flexUnitsSum += panel;
 			});
+			console.log("flexUnitsSum", flexUnitsSum);
 			const newFlexValue = separatorPos * flexUnitsSum / layoutSize;
 			for (let i = 0; i <= draggingSeparatorIndex; i++) {
 				currentFlexValue += newLayout[i];
 			}
 			const relation = newFlexValue / currentFlexValue;
+			console.log("relation", relation);
 			for (let i = 0; i <= draggingSeparatorIndex; i++) {
 				newLayout[i] = newLayout[i] * relation;
 			}
+			console.log("newLayout", newLayout);
 			this.setState({
 				draggingSeparator: true,
 				layout: newLayout,
+				isBusyOnDragging: true,
 			});
-			this.setState({ isBusyOnDragging: true });
 			setTimeout(() => {
 				this.setState({ isBusyOnDragging: false });
 			}, separatorsRefreshInterval);
@@ -233,6 +238,7 @@ export default class Layout extends React.Component {
 		});
 		return (
 			<div
+				ref={input => this.layout = input}
 				style={Object.assign(
 					{},
 					orientation === "vertical"
