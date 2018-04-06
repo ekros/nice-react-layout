@@ -18,6 +18,16 @@ The aim of this project is to have a reduced set of components to create flexbox
 ![Simple example](https://raw.github.com/ekros/nice-react-layout/master/preview.gif)
 
 ## Basic Usage
+Components can be imported using ES6 modules syntax:
+
+```javascript
+  import { HorizontalLayout,
+           VerticalLayout,
+           Panel,
+           Separator,
+           Spacer,
+           View } from "nice-react-layout";
+```
 Creating a simple layout is as easy as this:
 
 ```javascript
