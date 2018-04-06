@@ -1,6 +1,6 @@
 # Nice React Layout
-Create complex and nice Flexbox-based layouts, without even knowing what flexbox means.
-
+A set of React components to create complex flexbox-based layouts without knowing what flexbox is.
+[https://ekros.github.io/nice-react-layout/](https://ekros.github.io/nice-react-layout/)
 ## Installation
 ```sh
 yarn add nice-react-layout
@@ -40,6 +40,7 @@ It renders an horizontal layout with two panels of the same size (they have prop
 
 <br />
 In both horizontal and vertical layouts add the prop 'proportion' with the proportional part it takes from the available space. This example creates a typical sidebar + content layout:
+
 ```javascript
   <HorizontalLayout mockup>
     <Panel proportion={1} />
@@ -144,3 +145,6 @@ It renders a blank space. Useful when you need to leave spaces between panels.
 | Prop                           | Description                                                |
 | ------------------------------ | ---------------------------------------------------------- |
 | size                           | Separator size in pixels                                   |
+
+---
+Like this project? ★ us on Github :)
