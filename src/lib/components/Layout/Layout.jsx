@@ -158,6 +158,7 @@ export default class Layout extends React.Component {
 	render() {
 		const {
 			children,
+			className,
 			customCss,
 			collapseSize,
 			mockup,
@@ -246,6 +247,7 @@ export default class Layout extends React.Component {
 						: styles.horizontalLayout,
 					customCss
 				)}
+				className={className}
 			>
 				{childrenWithProps}
 			</div>
@@ -255,6 +257,7 @@ export default class Layout extends React.Component {
 
 Layout.propTypes = {
 	children: PropTypes.arrayOf(PropTypes.element),
+	className: PropTypes.string,
 	customCss: PropTypes.object,
 	collapseSize: PropTypes.string,
 	mockup: PropTypes.bool,
@@ -263,6 +266,7 @@ Layout.propTypes = {
 };
 
 Layout.defaultProps = {
+	className: "",
 	mockup: false,
 	orientation: "horizontal",
 	reverse: false,

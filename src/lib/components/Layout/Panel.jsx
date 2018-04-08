@@ -40,6 +40,7 @@ export default class Panel extends React.Component {
 		const {
 			centered,
 			children,
+			className,
 			customCss,
 			collapsed,
 			collapsible,
@@ -114,6 +115,7 @@ export default class Panel extends React.Component {
 					collapsed ? styles.collapsedPanel : null,
 					mockupStyle
 				)}
+				className={className}
 			>
 				{collapsible ? (
 					<div
@@ -147,6 +149,7 @@ export default class Panel extends React.Component {
 Panel.propTypes = {
 	centered: PropTypes.bool,
 	children: PropTypes.node,
+	className: PropTypes.string,
 	customCss: PropTypes.object,
 	draggingSeparator: PropTypes.bool,
 	collapsed: PropTypes.bool,
@@ -186,6 +189,7 @@ Panel.propTypes = {
 
 Panel.defaultProps = {
 	centered: false,
+	className: "",
 	collapseSize: "30px",
 	collapseButtonContent: "Collapse",
 	collapseButtonCollapsedContent: "Extend",

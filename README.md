@@ -111,6 +111,7 @@ Creates a layout.
 ##### Props
 | Prop          | Description                                |
 | ------------- | ------------------------------------------ |
+| className     | Top-level element class name               |
 | collapseSize  | Collapsible panels size when collapsed     |
 | customCss     | Custom layout CSS object                   |
 | mockup        | Render in mockup mode                      |
@@ -124,6 +125,7 @@ If you are familiar with flexbox, this is like a "flex item" with a flex value o
 | Prop                           | Description                                                |
 | ------------------------------ | ---------------------------------------------------------- |
 | centered                       | Center panel content                                       |
+| className                      | Top-level element class name                               |
 | collapsible                    | The panel can be collapsed                                 |
 | collapsed                      | Is the panel collapsed?                                    |
 | collapseButtonClass            | Adds a class to the collapse button                        |
