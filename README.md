@@ -134,6 +134,7 @@ If you are familiar with flexbox, this is like a "flex item" with a flex value o
 | collapseButtonStyle            | Inject inline CSS to the collapse button                   |
 | collapsePanel                  | Called when collapse button is clicked                     |
 | collapseSwitch                 | Custom collapse element (renders button if not provided)   |
+| columns                        | Number of columns (uses CSS multiple columns)              |
 | customCss                      | Custom panel CSS object (injects it as an inline style)    |
 | minHeight                      | Minimum panel height                                       |
 | minWidth                       | Minimum panel width                                        |

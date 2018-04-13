@@ -272,6 +272,45 @@ class App extends Component {
           </div>
         </div>
         <br />
+        <div className="pt-card">
+          <h5>Multi-column panel</h5>
+          Note you can pass a custom style using the customCss prop
+          <pre className="prettyprint">
+            {`
+              <VerticalLayout mockup>
+                <Panel fixed fixedHeight={50} />
+                <Panel>
+                  <HorizontalLayout mockup>
+                    <Panel />
+                    <Separator />
+                    <Panel
+                      columns={2}
+                      customCss={{
+                        columnRuleStyle: 'solid',
+                        columnRule: '2px solid gray' }}>
+                      Lorem ipsum...
+                    </Panel>
+                  </HorizontalLayout>
+                </Panel>
+              </VerticalLayout>
+            `}
+          </pre>
+          <div style={styles.example}>
+            <VerticalLayout mockup>
+              <Panel fixed fixedHeight={50} />
+              <Panel>
+                <HorizontalLayout mockup>
+                  <Panel />
+                  <Separator />
+                  <Panel columns={2} customCss={{ columnRuleStyle: 'solid', columnRule: '2px solid gray' }}>
+                    Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi. Nam liber tempor cum soluta nobis eleifend option congue nihil imperdiet doming id quod mazim placerat facer possim assum.
+                  </Panel>
+                </HorizontalLayout>
+              </Panel>
+            </VerticalLayout>
+          </div>
+        </div>        
+        <br />
       </div>
     );
   }

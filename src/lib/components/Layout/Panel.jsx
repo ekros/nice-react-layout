@@ -50,6 +50,7 @@ export default class Panel extends React.Component {
 			collapseSize,
 			collapseButtonStyle,
 			collapseSwitch,
+			columns,
 			draggingSeparator,
 			flex,
 			height,
@@ -111,6 +112,7 @@ export default class Panel extends React.Component {
 						? styles.verticalPanel
 						: styles.horizontalPanel,
 					centered ? styles.centered : null,
+					columns ? { columnCount: columns } : null,
 					customCss,
 					collapsed ? styles.collapsedPanel : null,
 					mockupStyle
@@ -167,6 +169,7 @@ Panel.propTypes = {
 	]),
 	collapsePanel: PropTypes.func,
 	collapseSwitch: PropTypes.element,
+	columns: PropTypes.number,
 	// contentAlign: PropTypes.oneOf([
 	//   "center",
 	//   "top",
@@ -193,5 +196,6 @@ Panel.defaultProps = {
 	collapseSize: "30px",
 	collapseButtonContent: "Collapse",
 	collapseButtonCollapsedContent: "Extend",
+	columns: undefined,
 	proportion: 1,
 };
