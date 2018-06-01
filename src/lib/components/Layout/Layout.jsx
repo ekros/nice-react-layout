@@ -8,6 +8,7 @@ import Spacer from "./Spacer.jsx";
 export default class Layout extends React.Component {
 	constructor(props) {
 		super(props);
+		this.layout = React.createRef();
 		this.mockupColors = [
 			"#ffcccc",
 			"#ccffff",
@@ -82,7 +83,8 @@ export default class Layout extends React.Component {
 	}
 	handleSeparatorMouseMove(e) {
 		const { orientation, reverse, separatorsRefreshInterval } = this.props;
-		const rect = this.layout.getBoundingClientRect();
+		console.log("this.", this);
+		const rect = this.layout.current.getBoundingClientRect();
 		const { top, left, width, height } = rect;
 		console.log("rect", rect);
 		console.log("e", e);
@@ -239,7 +241,7 @@ export default class Layout extends React.Component {
 		});
 		return (
 			<div
-				ref={input => this.layout = input}
+				ref={this.layout}
 				style={Object.assign(
 					{},
 					orientation === "vertical"
