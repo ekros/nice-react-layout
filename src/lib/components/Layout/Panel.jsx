@@ -108,6 +108,7 @@ export default class Panel extends React.Component {
 			<div
 				style={Object.assign(
 					{},
+					{ transition: draggingSeparator ? "none" : "flex 0.3s" },
 					orientation === "vertical"
 						? styles.verticalPanel
 						: styles.horizontalPanel,
