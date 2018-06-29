@@ -83,11 +83,8 @@ export default class Layout extends React.Component {
 	}
 	handleSeparatorMouseMove(e) {
 		const { orientation, reverse, separatorsRefreshInterval } = this.props;
-		console.log("this.", this);
 		const rect = this.layout.current.getBoundingClientRect();
 		const { top, left, width, height } = rect;
-		console.log("rect", rect);
-		console.log("e", e);
 		const {
 			draggingSeparatorIndex,
 			isBusyOnDragging,
@@ -96,7 +93,6 @@ export default class Layout extends React.Component {
 			totalFixedHeight,
 			totalSpacerSize,
 		} = this.state;
-		console.log("layout", layout);
 		const newLayout = layout.slice(0);
 		if (!isBusyOnDragging) {
 			let separatorPos;
@@ -118,26 +114,21 @@ export default class Layout extends React.Component {
 
 			let flexUnitsSum = 0;
 			let currentFlexValue = 0;
-			console.log("separatorPos", separatorPos);
 			const layoutSize =
 				orientation === "vertical"
 					? height - totalFixedHeight - totalSpacerSize
 					: width - totalFixedWidth - totalSpacerSize;
-			console.log("layoutSize", layoutSize);
 			newLayout.forEach(panel => {
 				flexUnitsSum += panel;
 			});
-			console.log("flexUnitsSum", flexUnitsSum);
 			const newFlexValue = separatorPos * flexUnitsSum / layoutSize;
 			for (let i = 0; i <= draggingSeparatorIndex; i++) {
 				currentFlexValue += newLayout[i];
 			}
 			const relation = newFlexValue / currentFlexValue;
-			console.log("relation", relation);
 			for (let i = 0; i <= draggingSeparatorIndex; i++) {
 				newLayout[i] = newLayout[i] * relation;
 			}
-			console.log("newLayout", newLayout);
 			this.setState({
 				draggingSeparator: true,
 				layout: newLayout,
