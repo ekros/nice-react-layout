@@ -55,7 +55,7 @@ class App extends Component {
       <div style={styles.main}>
         <br />
         <div style={{ width: "600px" }}>
-          <h1 style={{ display: "inline-block" }}><img style={{marginRight: "10px"}} src="logo.png" />nice-react-layout</h1>
+          <h1 style={{ display: "inline-block" }}>nice-react-layout</h1>
           <a style={{ float: "right" }} href="https://github.com/ekros/nice-react-layout">
             <img style={styles.github} src="https://github.com/favicon.ico" alt="github" />
           </a>
