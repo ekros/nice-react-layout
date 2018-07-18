@@ -24,7 +24,8 @@ export default class Layout extends React.Component {
 		let totalFixedHeight = 0;
 		let totalSpacerSize = 0;
 		React.Children.map(props.children, c => {
-			if (c.type === Panel) {
+			const { id } = c && c.props;
+			if (id === Panel) {
 				if (c.props.fixed) {
 					initialLayout.push(0);
 					if (c.props.fixedWidth) {
@@ -35,7 +36,7 @@ export default class Layout extends React.Component {
 				} else {
 					initialLayout.push(c.props.proportion);
 				}
-			} else if (c.type === Spacer) {
+			} else if (id === Spacer) {
 				totalSpacerSize += c.props.size;
 			}
 		});
@@ -175,8 +176,9 @@ export default class Layout extends React.Component {
 		};
 		let panelIndex = 0;
 		const childrenWithProps = React.Children.map(children, (c, index) => {
+			const { id } = c && c.props;
 			let child;
-			if (c.type === Separator) {
+			if (id === "separator") {
 				child = React.cloneElement(c, {
 					disabled:
 						(index - 1 === 0 && children[index - 1].props.fixed) ||
@@ -190,7 +192,7 @@ export default class Layout extends React.Component {
 					orientation,
 					layoutIndex: panelIndex - 1,
 				});
-			} else if (c.type === Panel) {
+			} else if (id === "panel") {
 				if (orientation === "vertical") {
 					child = React.cloneElement(c, {
 						collapseSize,
@@ -221,7 +223,7 @@ export default class Layout extends React.Component {
 					});
 				}
 				panelIndex += 1;
-			} else if (c.type === Spacer) {
+			} else if (id === "spacer") {
 				child = React.cloneElement(c, {
 					orientation,
 				});

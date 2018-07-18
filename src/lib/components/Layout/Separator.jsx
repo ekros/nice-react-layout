@@ -43,12 +43,17 @@ const Separator = ({
 };
 
 Separator.propTypes = {
+	id: PropTypes.string, // internal use only
 	defaultDblClickPos: PropTypes.number,
 	disabled: PropTypes.bool,
 	layoutIndex: PropTypes.number,
 	onSeparatorDoubleClick: PropTypes.func,
 	onSeparatorMouseDown: PropTypes.func,
 	orientation: PropTypes.string,
+};
+
+Separator.defaultProps = {
+	id: "separator"
 };
 
 export default Separator;

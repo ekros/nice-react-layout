@@ -14,8 +14,13 @@ const Spacer = ({ orientation, size }) => {
 };
 
 Spacer.propTypes = {
+  name: PropTypes.string,
   orientation: PropTypes.string,
   size: PropTypes.number,
+};
+
+Spacer.defaultProps = {
+  name: "spacer",
 };
 
 export default Spacer;

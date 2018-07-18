@@ -150,6 +150,7 @@ export default class Panel extends React.Component {
 }
 
 Panel.propTypes = {
+	id: PropTypes.string, // internal use only
 	centered: PropTypes.bool,
 	children: PropTypes.node,
 	className: PropTypes.string,
@@ -192,6 +193,7 @@ Panel.propTypes = {
 };
 
 Panel.defaultProps = {
+	id: "panel",
 	centered: false,
 	className: "",
 	collapseSize: "30px",
