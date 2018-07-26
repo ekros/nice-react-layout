@@ -25,7 +25,7 @@ export default class Layout extends React.Component {
 		let totalSpacerSize = 0;
 		React.Children.map(props.children, c => {
 			const { id } = c && c.props;
-			if (id === Panel) {
+			if (id === "panel") {
 				if (c.props.fixed) {
 					initialLayout.push(0);
 					if (c.props.fixedWidth) {
@@ -36,7 +36,7 @@ export default class Layout extends React.Component {
 				} else {
 					initialLayout.push(c.props.proportion);
 				}
-			} else if (id === Spacer) {
+			} else if (id === "spacer") {
 				totalSpacerSize += c.props.size;
 			}
 		});
