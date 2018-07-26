@@ -18,6 +18,18 @@ export default class Layout extends React.Component {
 			"#ecccff",
 			"#d6ffcc",
 			"#ffccf2",
+			"#f5ffcc",
+			"#ccd6ff",
+			"#ffdbcc",
+			"#ccf0ff",
+			"#ffe9cc",
+			"#d8ccff",
+			"#fffecc",
+			"#f3ccff",
+			"#ccffcd",
+			"#ffcce9",
+			"#eaffcc",
+			"#dbccff"
 		];
 		let initialLayout = [];
 		let totalFixedWidth = 0;
@@ -217,7 +229,7 @@ export default class Layout extends React.Component {
 						flex: c.props.fixed ? "none" : layout[panelIndex],
 						layoutIndex: panelIndex,
 						mockupStyle: mockup
-							? { background: this.mockupColors[index] }
+							? { background: this.mockupColors[this.mockupColors.length - index] }
 							: null,
 						orientation,
 					});
