@@ -8,6 +8,7 @@ const Separator = ({
 	onSeparatorDoubleClick,
 	onSeparatorMouseDown,
 	orientation,
+	customCss,
 }) => {
 	const styles = {
 		horizontalSeparator: {
@@ -27,11 +28,13 @@ const Separator = ({
 	};
 	return (
 		<div
-			style={
+			style={Object.assign(
+				{},
 				orientation === "vertical"
 					? styles.horizontalSeparator
-					: styles.verticalSeparator
-			}
+					: styles.verticalSeparator,
+				customCss
+			)}
 			onMouseDown={disabled ? null : () => onSeparatorMouseDown(layoutIndex)}
 			onDoubleClick={
 				disabled
@@ -50,6 +53,7 @@ Separator.propTypes = {
 	onSeparatorDoubleClick: PropTypes.func,
 	onSeparatorMouseDown: PropTypes.func,
 	orientation: PropTypes.string,
+	customCss: PropTypes.object,
 };
 
 Separator.defaultProps = {
