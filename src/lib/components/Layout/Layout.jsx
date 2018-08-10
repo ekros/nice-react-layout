@@ -81,7 +81,7 @@ export default class Layout extends React.Component {
 		document.addEventListener("mouseup", this.handleSeparatorMouseUp);
 		document.addEventListener("mousemove", this.handleSeparatorMouseMove);
 		if (this.props.onResize) {
-			this.props.onResize(this.state.layout);
+			this.props.onResize(this.state.layout, this.state.collapsedPanels);
 		}
 		this.setState({ draggingSeparatorIndex });
 	}
