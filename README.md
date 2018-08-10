@@ -149,6 +149,7 @@ It separates panels and allows them to be resized. This is optional.
 ##### Props
 | Prop                           | Description                                                |
 | ------------------------------ | ---------------------------------------------------------- |
+| customCss                      | Custom separator CSS object (injects it as an inline style)|
 | defaultDblClickPos             | Position where the separator goes when double-clicked      |
 | disabled                       | Is disabled?                                               |
 | onSeparatorDoubleClick         | Action called when the separator is double-clicked         |
