@@ -80,6 +80,9 @@ export default class Layout extends React.Component {
 	onSeparatorMouseDown(draggingSeparatorIndex) {
 		document.addEventListener("mouseup", this.handleSeparatorMouseUp);
 		document.addEventListener("mousemove", this.handleSeparatorMouseMove);
+		if (this.props.onResize) {
+			this.props.onResize(this.state.layout, this.state.collapsedPanels);
+		}
 		this.setState({ draggingSeparatorIndex });
 	}
 	handleSeparatorMouseMove(e) {
@@ -258,6 +261,7 @@ Layout.propTypes = {
 	mockup: PropTypes.bool,
 	orientation: PropTypes.string,
 	reverse: PropTypes.bool,
+	onResize: PropTypes.func,
 };
 
 Layout.defaultProps = {
@@ -266,4 +270,5 @@ Layout.defaultProps = {
 	orientation: "horizontal",
 	reverse: false,
 	separatorsRefreshInterval: 0,
+	onResize: null,
 };
