@@ -116,6 +116,7 @@ Creates a layout.
 | collapseSize  | Collapsible panels size when collapsed     |
 | customCss     | Custom layout CSS object                   |
 | mockup        | Render in mockup mode                      |
+| onResize      | Returns (layout, collapsedPanels) on resize|
 | orientation   | 'vertical' or 'horizontal'                 |
 | reverse       | Render layout in reverse order             |
 
