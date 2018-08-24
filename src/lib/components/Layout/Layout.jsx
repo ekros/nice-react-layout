@@ -103,17 +103,21 @@ export default class Layout extends React.Component {
 			if (reverse) {
 				separatorPos =
 					orientation === "vertical"
-						? height - e.layerY
-						: width - e.layerX;
+						? height - (e.clientY - top)
+						: width - (e.clientX - left);
 			} else {
-				separatorPos = orientation === "vertical" ? e.pageY - top : e.pageX - left;
+				separatorPos = orientation === "vertical" ? e.clientY - top : e.clientX - left;
 			}
 
 			// separator pos limits
 			if (separatorPos <= 0) {
 				separatorPos = 1;
-			} else if (separatorPos >= width) {
-				separatorPos = width;
+			} else {
+				if (orientation === "vertical" && separatorPos >= height) {
+					separatorPos = height;
+				} else if (orientation === "horizontal" && separatorPos >= width) {
+					separatorPos = width;
+				}
 			}
 
 			let flexUnitsSum = 0;

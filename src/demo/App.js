@@ -110,6 +110,7 @@ class App extends Component {
         <br />
         <div className="pt-card">
           <h5>Separator</h5>
+          <h6>Horizontal</h6>
           <pre className="prettyprint">
             {`
               <VerticalLayout mockup>
@@ -135,6 +136,35 @@ class App extends Component {
                   <Panel />
                   <Panel fixed fixedWidth={100} />
                 </HorizontalLayout>
+              </Panel>
+            </VerticalLayout>
+          </div>
+          <h6>Vertical</h6>
+          <pre className="prettyprint">
+            {`
+              <VerticalLayout mockup>
+                <Panel fixed fixedHeight={50} />
+                <Panel>
+                  <VerticalLayout mockup>
+                    <Panel />
+                    <Separator />
+                    <Panel />
+                    <Panel fixed fixedHeight={100} />
+                  </VerticalLayout>
+                </Panel>
+              </VerticalLayout>
+            `}
+          </pre>
+          <div style={styles.example}>
+            <VerticalLayout mockup>
+              <Panel fixed fixedHeight={50} />
+              <Panel>
+                <VerticalLayout mockup>
+                  <Panel />
+                  <Separator />
+                  <Panel />
+                  <Panel fixed fixedHeight={100} />
+                </VerticalLayout>
               </Panel>
             </VerticalLayout>
           </div>
