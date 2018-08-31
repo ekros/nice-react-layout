@@ -4,7 +4,6 @@ import VerticalLayout from "./VerticalLayout.jsx";
 import Panel from "./Panel.jsx";
 import Separator from "./Separator.jsx";
 import Spacer from "./Spacer.jsx";
-import { FormLayout, TableLayout } from "./panel_layouts";
 
 export {
 	Layout,
@@ -13,6 +12,4 @@ export {
 	Panel,
 	Separator,
 	Spacer,
-	FormLayout,
-	TableLayout,
 };

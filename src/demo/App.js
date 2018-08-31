@@ -7,10 +7,6 @@ import {
   Spacer
 } from "../lib/components/Layout";
 import { View } from "../lib/components/View";
-import {
-  FormLayout,
-  TableLayout
-} from "../lib/components/Layout/panel_layouts";
 import "./App.css";
 
 class App extends Component {
