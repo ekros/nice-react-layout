@@ -1,6 +1,6 @@
 {
   "name": "nice-react-layout",
-  "version": "0.7.0",
+  "version": "0.7.1",
   "description": "Create complex and nice Flexbox-based layouts, without even knowing what flexbox means",
   "repository": "git@github.com:ekros/nice-react-layout.git",
   "author": "Eric Ros <ericrosbh@gmail.com>",
