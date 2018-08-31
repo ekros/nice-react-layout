@@ -177,18 +177,22 @@ class App extends Component {
         </div>
         <br />
         <div className="pt-card">
-          <h5>Panels with size (drag separator to see it)</h5>
+          <h5>Panels with size (drag separators to see it)</h5>
           <pre className="prettyprint">
             {`
               <VerticalLayout mockup>
                 <Panel fixed fixedHeight={50} />
                 <Panel>
                   <HorizontalLayout mockup>
-                    <Panel />
-                    <Separator />
-                    <Panel showSize centered>
-                      This panel shows its size
+                    <Panel>
+                      <VerticalLayout mockup>
+                        <Panel showSize />
+                        <Separator />
+                        <Panel showSize />
+                      </VerticalLayout>
                     </Panel>
+                    <Separator />
+                    <Panel showSize />
                     <Panel fixed fixedWidth={100} />
                   </HorizontalLayout>
                 </Panel>
@@ -200,11 +204,15 @@ class App extends Component {
               <Panel fixed fixedHeight={50} />
               <Panel>
                 <HorizontalLayout mockup>
-                  <Panel />
-                  <Separator />
-                  <Panel showSize centered>
-                    This panel shows its size
+                  <Panel>
+                    <VerticalLayout mockup>
+                      <Panel showSize />
+                      <Separator />
+                      <Panel showSize />
+                    </VerticalLayout>
                   </Panel>
+                  <Separator />
+                  <Panel showSize />
                   <Panel fixed fixedWidth={100} />
                 </HorizontalLayout>
               </Panel>
