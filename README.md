@@ -148,6 +148,7 @@ If you are familiar with flexbox, this is like a "flex item" with a flex value o
 | orientation                    | 'vertical' or 'horizontal'                                 |
 | proportion                     | Proportion it uses from the available space (default = 1)  |
 | reverse                        | Render layout in reverse order                             |
+| showSize                       | Show panel size while dragging adjacent separators         |
 | sidebar                        | Don't do much by it self. It is a requirement for sidebar props like 'collapsible'                             |
 ### Separator
 It separates panels and allows them to be resized. This is optional.
