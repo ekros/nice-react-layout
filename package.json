@@ -18,6 +18,7 @@
   "dependencies": {
     "@blueprintjs/core": "^2.0.0-rc.2",
     "gh-pages": "^1.1.0",
+    "react-sizeme": "^2.5.2",
     "underscore": "^1.8.3"
   },
   "devDependencies": {

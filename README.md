@@ -1,4 +1,8 @@
+[![Stable Release](https://img.shields.io/npm/v/nice-react-layout.svg)](https://npm.im/nice-react-layout)
+![last commit](https://img.shields.io/github/last-commit/google/skia.svg)
+![license](https://img.shields.io/github/license/mashape/apistatus.svg)
 [![DeepScan grade](https://deepscan.io/api/projects/2670/branches/18301/badge/grade.svg)](https://deepscan.io/dashboard#view=project&pid=2670&bid=18301)
+
 # ![logo](public/logo.png) Nice React Layout
 A set of React components to create complex flexbox-based layouts without knowing what flexbox is.
 [https://ekros.github.io/nice-react-layout/](https://ekros.github.io/nice-react-layout/)
