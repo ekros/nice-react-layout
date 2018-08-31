@@ -56,10 +56,20 @@ class App extends Component {
         <br />
         <div style={{ width: "600px" }}>
           <h1 style={{ display: "inline-block" }}>nice-react-layout</h1>
-          <a style={{ float: "right" }} href="https://github.com/ekros/nice-react-layout">
-            <img style={styles.github} src="https://github.com/favicon.ico" alt="github" />
+          <a
+            style={{ float: "right" }}
+            href="https://github.com/ekros/nice-react-layout"
+          >
+            <img
+              style={styles.github}
+              src="https://github.com/favicon.ico"
+              alt="github"
+            />
           </a>
-          <p>A set of React components to create complex flexbox-based layouts without knowing what flexbox is.</p>
+          <p>
+            A set of React components to create complex flexbox-based layouts
+            without knowing what flexbox is.
+          </p>
         </div>
         <br />
         <div className="pt-card">
@@ -133,6 +143,42 @@ class App extends Component {
                   <Panel />
                   <Separator />
                   <Panel />
+                  <Panel fixed fixedWidth={100} />
+                </HorizontalLayout>
+              </Panel>
+            </VerticalLayout>
+          </div>
+        </div>
+        <br />
+        <div className="pt-card">
+          <h5>Panels with size (drag separator to see it)</h5>
+          <pre className="prettyprint">
+            {`
+              <VerticalLayout mockup>
+                <Panel fixed fixedHeight={50} />
+                <Panel>
+                  <HorizontalLayout mockup>
+                    <Panel />
+                    <Separator />
+                    <Panel showSize centered>
+                      This panel shows its size
+                    </Panel>
+                    <Panel fixed fixedWidth={100} />
+                  </HorizontalLayout>
+                </Panel>
+              </VerticalLayout>
+            `}
+          </pre>
+          <div style={styles.example}>
+            <VerticalLayout mockup>
+              <Panel fixed fixedHeight={50} />
+              <Panel>
+                <HorizontalLayout mockup>
+                  <Panel />
+                  <Separator />
+                  <Panel showSize centered>
+                    This panel shows its size
+                  </Panel>
                   <Panel fixed fixedWidth={100} />
                 </HorizontalLayout>
               </Panel>
@@ -302,8 +348,25 @@ class App extends Component {
                 <HorizontalLayout mockup>
                   <Panel />
                   <Separator />
-                  <Panel columns={2} customCss={{ columnRuleStyle: 'solid', columnRule: '2px solid gray' }}>
-                    Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi. Nam liber tempor cum soluta nobis eleifend option congue nihil imperdiet doming id quod mazim placerat facer possim assum.
+                  <Panel
+                    columns={2}
+                    customCss={{
+                      columnRuleStyle: "solid",
+                      columnRule: "2px solid gray"
+                    }}
+                  >
+                    Lorem ipsum dolor sit amet, consectetuer adipiscing elit,
+                    sed diam nonummy nibh euismod tincidunt ut laoreet dolore
+                    magna aliquam erat volutpat. Ut wisi enim ad minim veniam,
+                    quis nostrud exerci tation ullamcorper suscipit lobortis
+                    nisl ut aliquip ex ea commodo consequat. Duis autem vel eum
+                    iriure dolor in hendrerit in vulputate velit esse molestie
+                    consequat, vel illum dolore eu feugiat nulla facilisis at
+                    vero eros et accumsan et iusto odio dignissim qui blandit
+                    praesent luptatum zzril delenit augue duis dolore te feugait
+                    nulla facilisi. Nam liber tempor cum soluta nobis eleifend
+                    option congue nihil imperdiet doming id quod mazim placerat
+                    facer possim assum.
                   </Panel>
                 </HorizontalLayout>
               </Panel>
