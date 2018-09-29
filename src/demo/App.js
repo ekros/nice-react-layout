@@ -4,9 +4,7 @@ import {
   VerticalLayout,
   Panel,
   Separator,
-  Spacer
 } from "../lib/components/Layout";
-import { View } from "../lib/components/View";
 import "./App.css";
 
 class App extends Component {

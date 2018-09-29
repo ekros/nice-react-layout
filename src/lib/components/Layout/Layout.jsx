@@ -1,9 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
 import _ from "underscore";
-import Separator from "./Separator.jsx";
-import Panel from "./Panel.jsx";
-import Spacer from "./Spacer.jsx";
 
 export default class Layout extends React.Component {
 	constructor(props) {

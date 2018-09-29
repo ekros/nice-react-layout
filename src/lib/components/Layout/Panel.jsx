@@ -55,9 +55,7 @@ export default class Panel extends React.Component {
       mockupStyle,
       showSize,
       orientation,
-      proportion,
       sidebar,
-      size,
       width
     } = this.props;
     const styles = {
