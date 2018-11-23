@@ -77,7 +77,7 @@ export default class Panel extends React.Component {
             : this.calculatePanelFlex(), // TODO: remove local calculation???
         minWidth: sidebar && collapsible && collapsed ? collapseSize : minWidth,
         overflowX: "auto",
-        overflowY: "hidden",
+        overflowY: "auto",
         width: width || "auto"
       },
       panelSize: {
