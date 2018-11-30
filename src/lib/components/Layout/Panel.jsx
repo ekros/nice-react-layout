@@ -3,14 +3,63 @@ import PropTypes from "prop-types";
 import { SizeMe } from "react-sizeme";
 
 export default class Panel extends React.Component {
-  constructor(props) {
-    super(props);
-    this.calculatePanelFlex = this.calculatePanelFlex.bind(this);
-    this.calculatePanelLength = this.calculatePanelLength.bind(this);
-    this.toggleCollapse = this.toggleCollapse.bind(this);
-  }
+  static propTypes = {
+    id: PropTypes.string, // internal use only
+    centered: PropTypes.bool,
+    children: PropTypes.node,
+    className: PropTypes.string,
+    customCss: PropTypes.object,
+    draggingSeparator: PropTypes.bool,
+    collapsed: PropTypes.bool,
+    collapsible: PropTypes.bool,
+    collapseButtonClass: PropTypes.string,
+    collapseSize: PropTypes.string,
+    collapseButtonStyle: PropTypes.object,
+    collapseButtonContent: PropTypes.oneOfType([
+      PropTypes.string,
+      PropTypes.element
+    ]),
+    collapseButtonCollapsedContent: PropTypes.oneOfType([
+      PropTypes.string,
+      PropTypes.element
+    ]),
+    collapsePanel: PropTypes.func,
+    collapseSwitch: PropTypes.element,
+    columns: PropTypes.number,
+    // contentAlign: PropTypes.oneOf([
+    //   "center",
+    //   "top",
+    //   "right",
+    //   "bottom",
+    //   "left",
+    //   "top right",
+    //   "bottom right",
+    //   "bottom left",
+    //   "top left"
+    // ]),
+    flex: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+    layoutIndex: PropTypes.number,
+    minHeight: PropTypes.number,
+    minWidth: PropTypes.number,
+    mockupStyle: PropTypes.object,
+    proportion: PropTypes.number,
+    showSize: PropTypes.bool,
+    sidebar: PropTypes.bool
+  };
 
-  calculatePanelFlex() {
+  static defaultProps = {
+    id: "panel",
+    centered: false,
+    className: "",
+    collapseSize: "30px",
+    collapseButtonContent: "Collapse",
+    collapseButtonCollapsedContent: "Extend",
+    columns: undefined,
+    proportion: 1,
+    showSize: false
+  };
+
+  calculatePanelFlex = () => {
     const { sidebar, collapsed, collapsible, collapseSize } = this.props;
     let flex;
     if (sidebar && collapsible) {
@@ -23,14 +72,14 @@ export default class Panel extends React.Component {
       flex = this.calculatePanelLength();
     }
     return flex;
-  }
-  calculatePanelLength() {
-    return this.props.proportion;
-  }
-  toggleCollapse() {
+  };
+
+  calculatePanelLength = () => this.props.proportion;
+
+  toggleCollapse = () => {
     const { collapsePanel, layoutIndex } = this.props;
     collapsePanel(layoutIndex);
-  }
+  };
 
   render() {
     const {
@@ -84,13 +133,13 @@ export default class Panel extends React.Component {
         position: "absolute",
         background: "rgba(255, 255, 255, 0.5)",
         borderRadius: "4px",
-				color: "#222222",
-				fontSize: "11px",
+        color: "#222222",
+        fontSize: "11px",
         right: "5px",
         bottom: "5px",
         width: "90px",
         height: "15px",
-				textAlign: "center"
+        textAlign: "center"
       },
       verticalPanel: {
         position: "relative",
@@ -155,7 +204,11 @@ export default class Panel extends React.Component {
             ) : null}
             {children}
             {draggingSeparator && showSize ? (
-              <div style={styles.panelSize}>{size ? `${Math.floor(size.width)} x ${Math.floor(size.height)}` : null}</div>
+              <div style={styles.panelSize}>
+                {size
+                  ? `${Math.floor(size.width)} x ${Math.floor(size.height)}`
+                  : null}
+              </div>
             ) : null}
           </div>
         )}
@@ -163,59 +216,3 @@ export default class Panel extends React.Component {
     );
   }
 }
-
-Panel.propTypes = {
-  id: PropTypes.string, // internal use only
-  centered: PropTypes.bool,
-  children: PropTypes.node,
-  className: PropTypes.string,
-  customCss: PropTypes.object,
-  draggingSeparator: PropTypes.bool,
-  collapsed: PropTypes.bool,
-  collapsible: PropTypes.bool,
-  collapseButtonClass: PropTypes.string,
-  collapseSize: PropTypes.string,
-  collapseButtonStyle: PropTypes.object,
-  collapseButtonContent: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.element
-  ]),
-  collapseButtonCollapsedContent: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.element
-  ]),
-  collapsePanel: PropTypes.func,
-  collapseSwitch: PropTypes.element,
-  columns: PropTypes.number,
-  // contentAlign: PropTypes.oneOf([
-  //   "center",
-  //   "top",
-  //   "right",
-  //   "bottom",
-  //   "left",
-  //   "top right",
-  //   "bottom right",
-  //   "bottom left",
-  //   "top left"
-  // ]),
-  flex: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-  layoutIndex: PropTypes.number,
-  minHeight: PropTypes.number,
-  minWidth: PropTypes.number,
-  mockupStyle: PropTypes.object,
-  proportion: PropTypes.number,
-  showSize: PropTypes.bool,
-  sidebar: PropTypes.bool
-};
-
-Panel.defaultProps = {
-  id: "panel",
-  centered: false,
-  className: "",
-  collapseSize: "30px",
-  collapseButtonContent: "Collapse",
-  collapseButtonCollapsedContent: "Extend",
-  columns: undefined,
-  proportion: 1,
-  showSize: false
-};
