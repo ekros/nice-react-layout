@@ -43,6 +43,7 @@ export default class Panel extends React.Component {
     minWidth: PropTypes.number,
     mockupStyle: PropTypes.object,
     proportion: PropTypes.number,
+    render: PropTypes.func,
     showSize: PropTypes.bool,
     sidebar: PropTypes.bool
   };
@@ -56,6 +57,7 @@ export default class Panel extends React.Component {
     collapseButtonCollapsedContent: "Extend",
     columns: undefined,
     proportion: 1,
+    render: undefined,
     showSize: false
   };
 
@@ -104,6 +106,7 @@ export default class Panel extends React.Component {
       mockupStyle,
       showSize,
       orientation,
+      render,
       sidebar,
       width
     } = this.props;
@@ -202,7 +205,7 @@ export default class Panel extends React.Component {
                 )}
               </div>
             ) : null}
-            {children}
+            {render ? render({ size }) : children}
             {draggingSeparator && showSize ? (
               <div style={styles.panelSize}>
                 {size

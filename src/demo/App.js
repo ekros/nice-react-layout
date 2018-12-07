@@ -3,26 +3,23 @@ import {
   HorizontalLayout,
   VerticalLayout,
   Panel,
-  Separator,
+  Separator
 } from "../lib/components/Layout";
 import "./App.css";
 
 const mockupContent = (
   <p>
-    Lorem ipsum dolor sit amet, consectetuer adipiscing elit,
-    sed diam nonummy nibh euismod tincidunt ut laoreet dolore
-    magna aliquam erat volutpat. Ut wisi enim ad minim veniam,
-    quis nostrud exerci tation ullamcorper suscipit lobortis
-    nisl ut aliquip ex ea commodo consequat. Duis autem vel eum
-    iriure dolor in hendrerit in vulputate velit esse molestie
-    consequat, vel illum dolore eu feugiat nulla facilisis at
-    vero eros et accumsan et iusto odio dignissim qui blandit
-    praesent luptatum zzril delenit augue duis dolore te feugait
-    nulla facilisi. Nam liber tempor cum soluta nobis eleifend
-    option congue nihil imperdiet doming id quod mazim placerat
-    facer possim assum.
+    Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy
+    nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut
+    wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit
+    lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure
+    dolor in hendrerit in vulputate velit esse molestie consequat, vel illum
+    dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio
+    dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te
+    feugait nulla facilisi. Nam liber tempor cum soluta nobis eleifend option
+    congue nihil imperdiet doming id quod mazim placerat facer possim assum.
   </p>
-)
+);
 class App extends Component {
   render() {
     const styles = {
@@ -415,6 +412,82 @@ class App extends Component {
           </div>
         </div>
         <br />
+        <div className="pt-card">
+          <h5>Panels with render prop</h5>
+          In this example, we use the panel size to change its background
+          <pre className="prettyprint">
+            {`
+              <VerticalLayout mockup>
+                <Panel fixed fixedHeight={50} />
+                <Panel>
+                  <HorizontalLayout mockup>
+                    <Panel>
+                      <VerticalLayout mockup>
+                        <Panel
+                          render={({ size }) => (
+                            <div
+                              style={{
+                                position: "absolute",
+                                color: "white",
+                                width: "100%",
+                                height: "100%",
+                                lineHeight: \`\${size.height}px\`,
+                                background: \`rgb(0, \${size.width /
+                                  4}, \${size.height / 4})\`,
+                                  textAlign: "center"
+                                }}
+                                >
+                                Resize me
+                              </div>
+                            )}
+                            />
+                        <Separator />
+                        <Panel />
+                      </VerticalLayout>
+                    </Panel>
+                    <Separator />
+                    <Panel />
+                  </HorizontalLayout>
+                </Panel>
+              </VerticalLayout>
+              `}
+          </pre>
+          <div style={styles.example}>
+            <VerticalLayout mockup>
+              <Panel fixed fixedHeight={50} />
+              <Panel>
+                <HorizontalLayout mockup>
+                  <Panel>
+                    <VerticalLayout mockup>
+                      <Panel
+                        render={({ size }) => (
+                          <div
+                            style={{
+                              position: "absolute",
+                              color: "white",
+                              width: "100%",
+                              height: "100%",
+                              lineHeight: `${size.height}px`,
+                              background: `rgb(0, ${size.width /
+                                4}, ${size.height / 4})`,
+                              textAlign: "center"
+                            }}
+                          >
+                            Resize me
+                          </div>
+                        )}
+                      />
+                      <Separator />
+                      <Panel />
+                    </VerticalLayout>
+                  </Panel>
+                  <Separator />
+                  <Panel />
+                </HorizontalLayout>
+              </Panel>
+            </VerticalLayout>
+          </div>
+        </div>
       </div>
     );
   }
