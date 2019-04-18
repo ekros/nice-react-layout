@@ -20,6 +20,39 @@ const mockupContent = (
     congue nihil imperdiet doming id quod mazim placerat facer possim assum.
   </p>
 );
+
+const catUrls = [
+  `http://placekitten.com/${300 + Math.floor(Math.random() * 5)}/${200 +
+    Math.floor(Math.random() * 5)}`,
+  `http://placekitten.com/${300 + Math.floor(Math.random() * 5)}/${200 +
+    Math.floor(Math.random() * 5)}`,
+  `http://placekitten.com/${300 + Math.floor(Math.random() * 5)}/${200 +
+    Math.floor(Math.random() * 5)}`,
+  `http://placekitten.com/${300 + Math.floor(Math.random() * 5)}/${200 +
+    Math.floor(Math.random() * 5)}`,
+  `http://placekitten.com/${300 + Math.floor(Math.random() * 5)}/${200 +
+    Math.floor(Math.random() * 5)}`,
+  `http://placekitten.com/${300 + Math.floor(Math.random() * 5)}/${200 +
+    Math.floor(Math.random() * 5)}`
+];
+
+const catPanel = (proportion, imageIndex) => (
+  <Panel
+    customCss={{
+      backgroundImage: `url('${catUrls[imageIndex]}')`,
+      backgroundPosition: "center",
+      flex: "0 0 200px",
+      flexWrap: "wrap",
+      height: "200px",
+      overflow: "hidden"
+    }}
+    draggable
+    droppable
+    proportion={proportion}
+    render={({ size }) => <div style={{ width: "100%", height: "100%" }} />}
+  />
+);
+
 class App extends Component {
   render() {
     const styles = {
@@ -486,6 +519,65 @@ class App extends Component {
                 </HorizontalLayout>
               </Panel>
             </VerticalLayout>
+          </div>
+        </div>
+        <br />
+        <div className="pt-card">
+          <h5>Drag and drop panels</h5>
+          <h6>
+            Images provided by{" "}
+            <a
+              href="http://placekitten.com/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              placekitten
+            </a>
+          </h6>
+          <pre className="prettyprint">
+            {`
+              <HorizontalLayout
+                customCss={{
+                  width: "600px",
+                  overflow: "hidden",
+                  flexWrap: "wrap"
+                }}
+              >
+                <Panel
+                  customCss={{
+                    backgroundImage: url(http://placekitten.com/301/202),
+                    backgroundPosition: "center",
+                    flex: "0 0 200px",
+                    flexWrap: "wrap",
+                    height: "200px",
+                    overflow: "hidden"
+                  }}
+                  draggable
+                  droppable
+                  proportion={proportion}
+                  render={({ size }) => (
+                    <div style={{ width: "100%", height: "100%" }} />
+                  )}
+                />
+                ...
+              </HorizontalLayout>
+              `}
+          </pre>
+          <div style={styles.example}>
+            <HorizontalLayout
+              customCss={{
+                width: "600px",
+                overflow: "hidden",
+                flexWrap: "wrap"
+              }}
+            >
+              {catPanel(0, 0)}
+              {catPanel(0, 1)}
+              {catPanel(0, 2)}
+              {catPanel(0, 3)}
+              {catPanel(0, 4)}
+              {catPanel(0, 5)}
+            </HorizontalLayout>
           </div>
         </div>
       </div>

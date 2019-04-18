@@ -2,6 +2,15 @@ import React from "react";
 import PropTypes from "prop-types";
 import _ from "underscore";
 
+// swap array indexes. Work only for flat arrays
+const swapArrayIndexes = (arr, index1, index2) => {
+  let a = arr.slice(0);
+  const buff = a[index1];
+  a[index1] = a[index2];
+  a[index2] = buff;
+  return a;
+};
+
 export default class Layout extends React.Component {
   constructor(props) {
     super(props);
@@ -29,12 +38,14 @@ export default class Layout extends React.Component {
       "#dbccff"
     ];
     let initialLayout = [];
+    let initialOrdering = [];
     let totalFixedWidth = 0;
     let totalFixedHeight = 0;
     let totalSpacerSize = 0;
-    React.Children.map(props.children, c => {
+    React.Children.map(props.children, (c, index) => {
       const { id } = c && c.props;
       if (id === "panel") {
+        initialOrdering.push(index);
         if (c.props.fixed) {
           initialLayout.push(0);
           if (c.props.fixedWidth) {
@@ -51,10 +62,13 @@ export default class Layout extends React.Component {
     });
     this.state = {
       collapsedPanels: [], // array of indexes
+      draggingPanelIndex: undefined,
+      draggingPanelOverIndex: undefined,
       draggingSeparator: false,
       draggingSeparatorIndex: undefined,
       isBusyOnDragging: false, // sidebar dragging throttle
       layout: initialLayout,
+      layoutOrdering: initialOrdering, // by default, we render in normal order
       totalFixedWidth,
       totalFixedHeight,
       totalSpacerSize
@@ -91,6 +105,11 @@ export default class Layout extends React.Component {
       });
     }
   };
+
+  draggingOver = layoutIndex => {
+    this.setState({ draggingPanelOverIndex: layoutIndex });
+  };
+
   onSeparatorDoubleClick = (draggingSeparatorIndex, defaultDblClickPos) => {
     this.setState({ draggingSeparatorIndex }, () => {
       this.handleSeparatorMouseMove(
@@ -181,6 +200,42 @@ export default class Layout extends React.Component {
     });
   };
 
+  startDraggingPanel = panelIndex => {
+    this.setState({ draggingPanelIndex: panelIndex });
+  };
+
+  stopDraggingPanel = () => {
+    // swap panels
+    const {
+      layoutOrdering,
+      draggingPanelIndex,
+      draggingPanelOverIndex
+    } = this.state;
+    if (
+      layoutOrdering &&
+      draggingPanelIndex !== null &&
+      draggingPanelIndex !== undefined &&
+      draggingPanelOverIndex !== null &&
+      draggingPanelOverIndex !== undefined
+    ) {
+      const newOrder = swapArrayIndexes(
+        layoutOrdering,
+        draggingPanelIndex,
+        draggingPanelOverIndex
+      );
+      this.setState({
+        draggingPanelIndex: undefined,
+        draggingPanelOverIndex: undefined,
+        layoutOrdering: newOrder
+      });
+    } else {
+      this.setState({
+        draggingPanelIndex: undefined,
+        draggingPanelOverIndex: undefined
+      });
+    }
+  };
+
   render() {
     const {
       children,
@@ -191,7 +246,14 @@ export default class Layout extends React.Component {
       orientation,
       reverse
     } = this.props;
-    const { collapsedPanels, draggingSeparator, layout } = this.state;
+    const {
+      collapsedPanels,
+      draggingPanelIndex,
+      draggingPanelOverIndex,
+      draggingSeparator,
+      layout,
+      layoutOrdering
+    } = this.state;
     const styles = {
       horizontalLayout: {
         cursor: draggingSeparator ? "col-resize" : "default",
@@ -230,23 +292,32 @@ export default class Layout extends React.Component {
             collapseSize,
             collapsed: collapsedPanels.includes(panelIndex),
             collapsePanel: this.collapsePanel,
+            draggingOver: this.draggingOver,
+            draggingPanelIndex,
             draggingSeparator,
             flex: c.props.fixed ? "none" : layout[panelIndex],
             height: c.props.fixedHeight,
+            isDraggingOver: panelIndex === draggingPanelOverIndex,
             layoutIndex: panelIndex,
             mockupStyle: mockup
               ? { background: this.mockupColors[index] }
               : null,
-            orientation
+            order: layoutOrdering[index],
+            orientation,
+            startDragging: this.startDraggingPanel,
+            stopDragging: this.stopDraggingPanel
           });
         } else {
           child = React.cloneElement(c, {
             collapseSize,
             collapsed: collapsedPanels.includes(panelIndex),
             collapsePanel: this.collapsePanel,
+            draggingOver: this.draggingOver,
+            draggingPanelIndex,
             draggingSeparator,
             width: c.props.fixedWidth,
             flex: c.props.fixed ? "none" : layout[panelIndex],
+            isDraggingOver: panelIndex === draggingPanelOverIndex,
             layoutIndex: panelIndex,
             mockupStyle: mockup
               ? {
@@ -255,7 +326,10 @@ export default class Layout extends React.Component {
                   ]
                 }
               : null,
-            orientation
+            order: layoutOrdering[index],
+            orientation,
+            startDragging: this.startDraggingPanel,
+            stopDragging: this.stopDraggingPanel
           });
         }
         panelIndex += 1;
