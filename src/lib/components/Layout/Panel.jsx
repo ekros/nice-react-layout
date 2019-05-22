@@ -177,7 +177,12 @@ export default class Panel extends React.PureComponent {
     panelClone.id = "panel-dragging-ghost";
     panelClone.style.position = "fixed";
     panelClone.style.opacity = 0.5;
-    panelClone.style.width = panelClone.style.flexBasis;
+    panelClone.style.width = `${
+      this.panel.current.getBoundingClientRect().width
+    }px`;
+    panelClone.style.height = `${
+      this.panel.current.getBoundingClientRect().height
+    }px`;
     panelClone.style.transition = "transform 0.2s";
     panelClone.style.transformOrigin = "0% 0%";
     panelClone.style.zIndex = 10;
