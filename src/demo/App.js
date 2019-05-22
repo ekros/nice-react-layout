@@ -524,16 +524,7 @@ class App extends Component {
         <br />
         <div className="pt-card">
           <h5>Drag and drop panels</h5>
-          <h6>
-            Images provided by{" "}
-            <a
-              href="http://placekitten.com/"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              placekitten
-            </a>
-          </h6>
+          Note: only works on panels in the same layout
           <pre className="prettyprint">
             {`
               <HorizontalLayout
@@ -563,6 +554,16 @@ class App extends Component {
               </HorizontalLayout>
               `}
           </pre>
+          <h6>
+            Images provided by{" "}
+            <a
+              href="http://placekitten.com/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              placekitten
+            </a>
+          </h6>
           <div style={styles.example}>
             <HorizontalLayout
               customCss={{
@@ -577,6 +578,58 @@ class App extends Component {
               {catPanel(0, 3)}
               {catPanel(0, 4)}
               {catPanel(0, 5)}
+            </HorizontalLayout>
+          </div>
+        </div>
+        <br />
+        <div className="pt-card">
+          <h5>Drag and drop - 2</h5>
+          <pre className="prettyprint">
+            {`
+              <HorizontalLayout
+                mockup
+                customCss={{
+                  width: "600px",
+                  overflow: "hidden",
+                  flexWrap: "wrap"
+                }}
+              >
+                <Panel draggable droppable centered>
+                  Drag and drop!
+                </Panel>
+                <Panel draggable droppable centered>
+                  Drag and drop!
+                </Panel>
+                <Panel proportion={2} draggable centered>
+                  Only drag
+                </Panel>
+                <Panel droppable centered>
+                  Only drop
+                </Panel>
+              </HorizontalLayout>
+            `}
+          </pre>
+          <div style={styles.example}>
+            <HorizontalLayout
+              mockup
+              customCss={{
+                width: "600px",
+                overflow: "hidden",
+                flexWrap: "wrap"
+              }}
+            >
+              <Panel draggable droppable centered>
+                Drag and drop!
+              </Panel>
+              <Panel draggable droppable centered>
+                Drag and drop!
+              </Panel>
+              <Panel proportion={2} draggable centered>
+                Only drag
+              </Panel>
+              <Panel droppable centered>
+                Only drop
+              </Panel>
             </HorizontalLayout>
           </div>
         </div>
