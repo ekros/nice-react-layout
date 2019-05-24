@@ -3,9 +3,55 @@ import {
   HorizontalLayout,
   VerticalLayout,
   Panel,
-  Separator,
+  Separator
 } from "../lib/components/Layout";
 import "./App.css";
+
+const mockupContent = (
+  <p>
+    Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy
+    nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut
+    wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit
+    lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure
+    dolor in hendrerit in vulputate velit esse molestie consequat, vel illum
+    dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio
+    dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te
+    feugait nulla facilisi. Nam liber tempor cum soluta nobis eleifend option
+    congue nihil imperdiet doming id quod mazim placerat facer possim assum.
+  </p>
+);
+
+const catUrls = [
+  `http://placekitten.com/${300 + Math.floor(Math.random() * 5)}/${200 +
+    Math.floor(Math.random() * 5)}`,
+  `http://placekitten.com/${300 + Math.floor(Math.random() * 5)}/${200 +
+    Math.floor(Math.random() * 5)}`,
+  `http://placekitten.com/${300 + Math.floor(Math.random() * 5)}/${200 +
+    Math.floor(Math.random() * 5)}`,
+  `http://placekitten.com/${300 + Math.floor(Math.random() * 5)}/${200 +
+    Math.floor(Math.random() * 5)}`,
+  `http://placekitten.com/${300 + Math.floor(Math.random() * 5)}/${200 +
+    Math.floor(Math.random() * 5)}`,
+  `http://placekitten.com/${300 + Math.floor(Math.random() * 5)}/${200 +
+    Math.floor(Math.random() * 5)}`
+];
+
+const catPanel = (proportion, imageIndex) => (
+  <Panel
+    customCss={{
+      backgroundImage: `url('${catUrls[imageIndex]}')`,
+      backgroundPosition: "center",
+      flex: "0 0 200px",
+      flexWrap: "wrap",
+      height: "200px",
+      overflow: "hidden"
+    }}
+    draggable
+    droppable
+    proportion={proportion}
+    render={({ size }) => <div style={{ width: "100%", height: "100%" }} />}
+  />
+);
 
 class App extends Component {
   render() {
@@ -72,14 +118,18 @@ class App extends Component {
             {`
             <HorizontalLayout mockup>
               <Panel proportion={1} />
-              <Panel proportion={3} />
+              <Panel proportion={3}>Lorem ipsum...</Panel>
             </HorizontalLayout>
             `}
           </pre>
           <div style={styles.example}>
             <HorizontalLayout mockup>
               <Panel proportion={1} />
-              <Panel proportion={3} />
+              <Panel proportion={3}>
+                {mockupContent}
+                {mockupContent}
+                {mockupContent}
+              </Panel>
             </HorizontalLayout>
           </div>
         </div>
@@ -387,18 +437,7 @@ class App extends Component {
                       columnRule: "2px solid gray"
                     }}
                   >
-                    Lorem ipsum dolor sit amet, consectetuer adipiscing elit,
-                    sed diam nonummy nibh euismod tincidunt ut laoreet dolore
-                    magna aliquam erat volutpat. Ut wisi enim ad minim veniam,
-                    quis nostrud exerci tation ullamcorper suscipit lobortis
-                    nisl ut aliquip ex ea commodo consequat. Duis autem vel eum
-                    iriure dolor in hendrerit in vulputate velit esse molestie
-                    consequat, vel illum dolore eu feugiat nulla facilisis at
-                    vero eros et accumsan et iusto odio dignissim qui blandit
-                    praesent luptatum zzril delenit augue duis dolore te feugait
-                    nulla facilisi. Nam liber tempor cum soluta nobis eleifend
-                    option congue nihil imperdiet doming id quod mazim placerat
-                    facer possim assum.
+                    {mockupContent}
                   </Panel>
                 </HorizontalLayout>
               </Panel>
@@ -406,6 +445,194 @@ class App extends Component {
           </div>
         </div>
         <br />
+        <div className="pt-card">
+          <h5>Panels with render prop</h5>
+          In this example, we use the panel size to change its background
+          <pre className="prettyprint">
+            {`
+              <VerticalLayout mockup>
+                <Panel fixed fixedHeight={50} />
+                <Panel>
+                  <HorizontalLayout mockup>
+                    <Panel>
+                      <VerticalLayout mockup>
+                        <Panel
+                          render={({ size }) => (
+                            <div
+                              style={{
+                                position: "absolute",
+                                color: "white",
+                                width: "100%",
+                                height: "100%",
+                                lineHeight: \`\${size.height}px\`,
+                                background: \`rgb(0, \${size.width /
+                                  4}, \${size.height / 4})\`,
+                                  textAlign: "center"
+                                }}
+                                >
+                                Resize me
+                              </div>
+                            )}
+                            />
+                        <Separator />
+                        <Panel />
+                      </VerticalLayout>
+                    </Panel>
+                    <Separator />
+                    <Panel />
+                  </HorizontalLayout>
+                </Panel>
+              </VerticalLayout>
+              `}
+          </pre>
+          <div style={styles.example}>
+            <VerticalLayout mockup>
+              <Panel fixed fixedHeight={50} />
+              <Panel>
+                <HorizontalLayout mockup>
+                  <Panel>
+                    <VerticalLayout mockup>
+                      <Panel
+                        render={({ size }) => (
+                          <div
+                            style={{
+                              position: "absolute",
+                              color: "white",
+                              width: "100%",
+                              height: "100%",
+                              lineHeight: `${size.height}px`,
+                              background: `rgb(0, ${size.width /
+                                4}, ${size.height / 4})`,
+                              textAlign: "center"
+                            }}
+                          >
+                            Resize me
+                          </div>
+                        )}
+                      />
+                      <Separator />
+                      <Panel />
+                    </VerticalLayout>
+                  </Panel>
+                  <Separator />
+                  <Panel />
+                </HorizontalLayout>
+              </Panel>
+            </VerticalLayout>
+          </div>
+        </div>
+        <br />
+        <div className="pt-card">
+          <h5>Drag and drop panels</h5>
+          Note: only works on panels in the same layout
+          <pre className="prettyprint">
+            {`
+              <HorizontalLayout
+                customCss={{
+                  width: "600px",
+                  overflow: "hidden",
+                  flexWrap: "wrap"
+                }}
+              >
+                <Panel
+                  customCss={{
+                    backgroundImage: url(http://placekitten.com/301/202),
+                    backgroundPosition: "center",
+                    flex: "0 0 200px",
+                    flexWrap: "wrap",
+                    height: "200px",
+                    overflow: "hidden"
+                  }}
+                  draggable
+                  droppable
+                  proportion={proportion}
+                  render={({ size }) => (
+                    <div style={{ width: "100%", height: "100%" }} />
+                  )}
+                />
+                ...
+              </HorizontalLayout>
+              `}
+          </pre>
+          <h6>
+            Images provided by{" "}
+            <a
+              href="http://placekitten.com/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              placekitten
+            </a>
+          </h6>
+          <div style={styles.example}>
+            <HorizontalLayout
+              customCss={{
+                width: "600px",
+                overflow: "hidden",
+                flexWrap: "wrap"
+              }}
+            >
+              {catPanel(0, 0)}
+              {catPanel(0, 1)}
+              {catPanel(0, 2)}
+              {catPanel(0, 3)}
+              {catPanel(0, 4)}
+              {catPanel(0, 5)}
+            </HorizontalLayout>
+          </div>
+        </div>
+        <br />
+        <div className="pt-card">
+          <h5>Drag and drop - 2</h5>
+          <pre className="prettyprint">
+            {`
+              <HorizontalLayout
+                mockup
+                customCss={{
+                  width: "600px",
+                  overflow: "hidden",
+                  flexWrap: "wrap"
+                }}
+              >
+                <Panel draggable droppable centered>
+                  Drag and drop!
+                </Panel>
+                <Panel draggable droppable centered>
+                  Drag and drop!
+                </Panel>
+                <Panel proportion={2} draggable centered>
+                  Only drag
+                </Panel>
+                <Panel droppable centered>
+                  Only drop
+                </Panel>
+              </HorizontalLayout>
+            `}
+          </pre>
+          <div style={styles.example}>
+            <HorizontalLayout
+              mockup
+              customCss={{
+                width: "600px",
+                overflow: "hidden",
+                flexWrap: "wrap"
+              }}
+            >
+              <Panel draggable droppable centered>
+                Drag and drop!
+              </Panel>
+              <Panel draggable droppable centered>
+                Drag and drop!
+              </Panel>
+              <Panel proportion={2} draggable centered>
+                Only drag
+              </Panel>
+              <Panel droppable centered>
+                Only drop
+              </Panel>
+            </HorizontalLayout>
+          </div>
+        </div>
       </div>
     );
   }
