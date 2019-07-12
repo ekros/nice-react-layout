@@ -53,6 +53,21 @@ const catPanel = (proportion, imageIndex) => (
   />
 );
 
+const Header = ({ backgroundColor, message, niceReactLayoutProps }) => (
+  <div style={{ backgroundColor, flex: "0 0 40px" }}>{message}</div>
+);
+
+const CustomPanel = ({ children, niceReactLayoutProps: { mockupStyle } }) => (
+  <div
+    style={{
+      backgroundColor: (mockupStyle && mockupStyle.background) || "black",
+      flex: "3"
+    }}
+  >
+    {children}
+  </div>
+);
+
 class App extends Component {
   render() {
     const styles = {
@@ -185,7 +200,7 @@ class App extends Component {
               <Panel fixed fixedHeight={50} />
               <Panel>
                 <HorizontalLayout mockup>
-                  <Panel />
+                  <Header message={"Hello"} />
                   <Separator />
                   <Panel />
                   <Panel fixed fixedWidth={100} />
@@ -631,6 +646,46 @@ class App extends Component {
                 Only drop
               </Panel>
             </HorizontalLayout>
+          </div>
+        </div>
+        <div className="pt-card">
+          <h5>
+            Custom panel components <b>(experimental)</b>
+          </h5>
+          <p>
+            Instead of using the Panel component, you can use your own
+            component.
+          </p>
+          <p>
+            It will receive a niceReactLayoutProps prop with (almost) all you
+            need to make it work as a normal panel.
+          </p>
+          <pre className="prettyprint">
+            {`
+            `}
+          </pre>
+          <div style={styles.example}>
+            <VerticalLayout mockup>
+              <Header
+                backgroundColor="crimson"
+                message={"I'm a custom header"}
+              />
+              <Panel>
+                <HorizontalLayout mockup>
+                  <Panel
+                    sidebar
+                    collapsible
+                    collapseButtonContent="<"
+                    collapseButtonCollapsedContent=">"
+                    collapseButtonStyle={{
+                      background: "white",
+                      border: "1px solid lightgray"
+                    }}
+                  />
+                <CustomPanel>I'm a custom panel and I'm getting the mockup background color as a prop.</CustomPanel>
+                </HorizontalLayout>
+              </Panel>
+            </VerticalLayout>
           </div>
         </div>
       </div>

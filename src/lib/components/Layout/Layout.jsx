@@ -338,7 +338,35 @@ export default class Layout extends React.Component {
           orientation
         });
       } else {
-        child = c;
+        if (orientation === "vertical") {
+          child = React.cloneElement(c, {
+            niceReactLayoutProps: {
+              layoutIndex: panelIndex,
+              mockupStyle: mockup
+                ? {
+                    background: this.mockupColors[
+                      this.mockupColors.length - index
+                    ]
+                  }
+                : null,
+              orientation
+            }
+          });
+        } else {
+          child = React.cloneElement(c, {
+            niceReactLayoutProps: {
+              layoutIndex: panelIndex,
+              mockupStyle: mockup
+                ? {
+                    background: this.mockupColors[
+                      this.mockupColors.length - index
+                    ]
+                  }
+                : null,
+              orientation
+            }
+          });
+        }
       }
       return child;
     });
