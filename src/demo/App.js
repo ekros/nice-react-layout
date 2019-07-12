@@ -82,7 +82,8 @@ class App extends Component {
         height: "400px",
         border: "1px solid gray",
         borderRadius: "4px",
-        margin: "10px 0px"
+        margin: "10px 0px",
+        overflow: "hidden"
       },
       github: {
         width: "32px",
@@ -648,7 +649,7 @@ class App extends Component {
             </HorizontalLayout>
           </div>
         </div>
-        <div className="pt-card">
+        <div style={{ width: "600px" }} className="pt-card">
           <h5>
             Custom panel components <b>(experimental)</b>
           </h5>
@@ -662,6 +663,30 @@ class App extends Component {
           </p>
           <pre className="prettyprint">
             {`
+              <VerticalLayout mockup>
+                <Header
+                  backgroundColor="crimson"
+                  message={"I'm a custom header"}
+                />
+                <Panel>
+                  <HorizontalLayout mockup>
+                    <Panel
+                      sidebar
+                      collapsible
+                      collapseButtonContent="<"
+                      collapseButtonCollapsedContent=">"
+                      collapseButtonStyle={{
+                        background: "white",
+                        border: "1px solid lightgray"
+                      }}
+                    />
+                    <CustomPanel>
+                      I'm a custom panel and I'm getting the
+                      mockup background color as a prop.
+                    </CustomPanel>
+                  </HorizontalLayout>
+                </Panel>
+              </VerticalLayout>
             `}
           </pre>
           <div style={styles.example}>
