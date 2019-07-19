@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import _ from "underscore";
+import reject from "lodash/reject";
 
 // swap array indexes. Work only for flat arrays
 const swapArrayIndexes = (arr, index1, index2) => {
@@ -37,6 +37,19 @@ export default class Layout extends React.Component {
       "#eaffcc",
       "#dbccff"
     ];
+    let layoutInfo = Layout.calculateLayout(props);
+    this.state = {
+      collapsedPanels: [], // array of indexes
+      draggingPanelIndex: undefined,
+      draggingPanelOverIndex: undefined,
+      draggingSeparator: false,
+      draggingSeparatorIndex: undefined,
+      isBusyOnDragging: false, // sidebar dragging throttle
+      ...layoutInfo
+    };
+  }
+
+  static calculateLayout(props) {
     let initialLayout = [];
     let initialOrdering = [];
     let totalFixedWidth = 0;
@@ -60,19 +73,20 @@ export default class Layout extends React.Component {
         totalSpacerSize += c.props.size;
       }
     });
-    this.state = {
-      collapsedPanels: [], // array of indexes
-      draggingPanelIndex: undefined,
-      draggingPanelOverIndex: undefined,
-      draggingSeparator: false,
-      draggingSeparatorIndex: undefined,
-      isBusyOnDragging: false, // sidebar dragging throttle
+    return {
       layout: initialLayout,
-      layoutOrdering: initialOrdering, // by default, we render in normal order
+      layoutOrdering: initialOrdering,
       totalFixedWidth,
       totalFixedHeight,
       totalSpacerSize
-    };
+    }
+  }
+
+  componentDidUpdate(prevProps, prevState, snapshot) {
+    let layoutInfo = Layout.calculateLayout(this.props);
+    if (layoutInfo.layout.length !== prevState.layout.length) {
+      this.setState({...layoutInfo});
+    }
   }
 
   static propTypes = {
@@ -101,7 +115,7 @@ export default class Layout extends React.Component {
       this.setState({ collapsedPanels: collapsedPanels.concat([layoutIndex]) });
     } else {
       this.setState({
-        collapsedPanels: _.reject(collapsedPanels, p => p === layoutIndex)
+        collapsedPanels: reject(collapsedPanels, p => p === layoutIndex)
       });
     }
   };
@@ -321,10 +335,10 @@ export default class Layout extends React.Component {
             layoutIndex: panelIndex,
             mockupStyle: mockup
               ? {
-                  background: this.mockupColors[
-                    this.mockupColors.length - index
+                background: this.mockupColors[
+                this.mockupColors.length - index
                   ]
-                }
+              }
               : null,
             order: layoutOrdering[index],
             orientation,
