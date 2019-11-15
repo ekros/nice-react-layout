@@ -69,7 +69,27 @@ const CustomPanel = ({ children, niceReactLayoutProps: { mockupStyle } }) => (
 );
 
 class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      dynamicPanels: []
+    }
+  }
+
+  addSmallPanel = () => {
+    this.setState({ dynamicPanels: this.state.dynamicPanels.concat({ proportion: 1 })});
+  }
+
+  addBigPanel = () => {
+    this.setState({ dynamicPanels: this.state.dynamicPanels.concat({ proportion: 2 })});
+  }
+
+  removePanel = () => {
+    this.setState({ dynamicPanels: this.state.dynamicPanels.slice(0, this.state.dynamicPanels.length - 2) });
+  }
+
   render() {
+    const { dynamicPanels } = this.state;
     const styles = {
       collapseButton: {
         background: "azure",
@@ -711,6 +731,28 @@ class App extends Component {
                 </HorizontalLayout>
               </Panel>
             </VerticalLayout>
+          </div>
+        </div>
+        <div className="pt-card">
+          <h5>Dynamic panels</h5>
+          <button onClick={this.addSmallPanel}>Add SMALL panel</button>
+          <button onClick={this.addBigPanel}>Add BIG panel</button>
+          <button onClick={this.removePanel}>Remove panel</button>
+          <pre className="prettyprint">
+            {`
+            `}
+          </pre>
+          <div style={styles.example}>
+            <HorizontalLayout
+              mockup
+              customCss={{
+                width: "600px",
+                overflow: "hidden",
+                flexWrap: "wrap"
+              }}
+            >
+              {dynamicPanels && dynamicPanels.map((p, index) => <Panel key={index} />)}
+            </HorizontalLayout>
           </div>
         </div>
       </div>
