@@ -54,7 +54,39 @@ const catPanel = (proportion, imageIndex) => (
 );
 
 class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      dynamicPanels: [
+        {
+          proportion: 1
+        },
+        { proportion: 2 }
+      ]
+    };
+  }
+  addSmallPanel = () => {
+    this.setState({
+      dynamicPanels: this.state.dynamicPanels.concat({ proportion: 1 })
+    });
+  };
+
+  addBigPanel = () => {
+    this.setState({
+      dynamicPanels: this.state.dynamicPanels.concat({ proportion: 2 })
+    });
+  };
+
+  removePanel = () => {
+    this.setState({
+      dynamicPanels: this.state.dynamicPanels.slice(
+        0,
+        this.state.dynamicPanels.length - 1
+      )
+    });
+  };
   render() {
+    const { dynamicPanels } = this.state;
     const styles = {
       collapseButton: {
         background: "azure",
@@ -630,6 +662,32 @@ class App extends Component {
               <Panel droppable centered>
                 Only drop
               </Panel>
+            </HorizontalLayout>
+          </div>
+        </div>
+        <div className="pt-card">
+          <h5>Dynamic panels</h5>
+          <button onClick={this.addSmallPanel}>Add SMALL panel</button>
+          <button onClick={this.addBigPanel}>Add BIG panel</button>
+          <button onClick={this.removePanel}>Remove panel</button>
+          <div style={styles.example}>
+            <HorizontalLayout
+              mockup
+              customCss={{
+                width: "600px",
+                overflow: "hidden",
+                flexWrap: "wrap"
+              }}
+            >
+              {dynamicPanels &&
+                dynamicPanels.map((p, index) => (
+                  <Panel
+                    key={index}
+                    proportion={(p && p.proportion) || undefined}
+                    draggable
+                    droppable
+                  />
+                ))}
             </HorizontalLayout>
           </div>
         </div>
