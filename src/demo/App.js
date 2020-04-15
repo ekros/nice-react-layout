@@ -73,20 +73,29 @@ class App extends Component {
     super(props);
     this.state = {
       dynamicPanels: []
-    }
+    };
   }
 
   addSmallPanel = () => {
-    this.setState({ dynamicPanels: this.state.dynamicPanels.concat({ proportion: 1 })});
-  }
+    this.setState({
+      dynamicPanels: this.state.dynamicPanels.concat({ proportion: 1 })
+    });
+  };
 
   addBigPanel = () => {
-    this.setState({ dynamicPanels: this.state.dynamicPanels.concat({ proportion: 2 })});
-  }
+    this.setState({
+      dynamicPanels: this.state.dynamicPanels.concat({ proportion: 2 })
+    });
+  };
 
   removePanel = () => {
-    this.setState({ dynamicPanels: this.state.dynamicPanels.slice(0, this.state.dynamicPanels.length - 2) });
-  }
+    this.setState({
+      dynamicPanels: this.state.dynamicPanels.slice(
+        0,
+        this.state.dynamicPanels.length - 2
+      )
+    });
+  };
 
   render() {
     const { dynamicPanels } = this.state;
@@ -668,13 +677,13 @@ class App extends Component {
             </HorizontalLayout>
           </div>
         </div>
-        <div className="pt-card">
+        <div style={{ width: "600px" }} className="pt-card">
           <h5>
-            Custom panel components <b>(experimental)</b>
+            Custom panel components <b>(EXPERIMENTAL)</b>
           </h5>
           <p>
-            Instead of using the Panel component, you can use your own
-            component.
+            Instead of using the Panel component, you can use your own component
+            (<b>Header</b> and <b>CustomPanel</b> are user-created)
           </p>
           <p>
             It will receive a niceReactLayoutProps prop with (almost) all you
@@ -682,6 +691,28 @@ class App extends Component {
           </p>
           <pre className="prettyprint">
             {`
+              <VerticalLayout mockup>
+                <Header
+                  backgroundColor="crimson"
+                  message={"I'm a custom header"}
+                />
+                <Panel>
+                  <HorizontalLayout mockup>
+                    <Panel
+                      sidebar
+                      collapsible
+                      collapseButtonContent="<"
+                      collapseButtonCollapsedContent=">"
+                      collapseButtonStyle={{
+                        background: "white",
+                        border: "1px solid lightgray"
+                      }}
+                    />
+                  <CustomPanel>I'm a custom panel and I'm getting the mockup
+                    background color as a prop.</CustomPanel>
+                  </HorizontalLayout>
+                </Panel>
+              </VerticalLayout>
             `}
           </pre>
           <div style={styles.example}>
@@ -702,7 +733,10 @@ class App extends Component {
                       border: "1px solid lightgray"
                     }}
                   />
-                <CustomPanel>I'm a custom panel and I'm getting the mockup background color as a prop.</CustomPanel>
+                  <CustomPanel>
+                    I'm a custom panel and I'm getting the mockup background
+                    color as a prop.
+                  </CustomPanel>
                 </HorizontalLayout>
               </Panel>
             </VerticalLayout>
@@ -726,7 +760,8 @@ class App extends Component {
                 flexWrap: "wrap"
               }}
             >
-              {dynamicPanels && dynamicPanels.map((p, index) => <Panel key={index} />)}
+              {dynamicPanels &&
+                dynamicPanels.map((p, index) => <Panel key={index} />)}
             </HorizontalLayout>
           </div>
         </div>
