@@ -108,7 +108,8 @@ class App extends Component {
       main: {
         display: "flex",
         flexDirection: "column",
-        alignItems: "center"
+        alignItems: "center",
+        marginTop: "20px"
       },
       tableTop: {
         width: "100%",
@@ -127,7 +128,10 @@ class App extends Component {
       <div style={styles.main}>
         <br />
         <div style={{ width: "600px" }}>
-          <h1 style={{ display: "inline-block" }}>nice-react-layout</h1>
+          <img src="./logo.png" />
+          <h1 style={{ display: "inline-block", marginLeft: "10px" }}>
+            nice-react-layout
+          </h1>
           <a
             style={{ float: "right" }}
             href="https://github.com/ekros/nice-react-layout"
