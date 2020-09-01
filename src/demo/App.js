@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import ScrollspyNav from "react-scrollspy-nav";
 import {
   HorizontalLayout,
   VerticalLayout,
@@ -105,11 +106,25 @@ class App extends Component {
         width: "32px",
         height: "32px"
       },
+      app: {
+        display: "flex",
+        alignItems: "flex-start"
+      },
       main: {
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
         marginTop: "20px"
+      },
+      navList: {
+        listStyle: "none"
+      },
+      scrollSpy: {
+        position: "sticky",
+        right: "0px",
+        top: "0px",
+        width: "225px",
+        height: "300px"
       },
       tableTop: {
         width: "100%",
@@ -125,574 +140,638 @@ class App extends Component {
       }
     };
     return (
-      <div style={styles.main}>
-        <br />
-        <div style={{ width: "600px" }}>
-          <img src="./logo.png" />
-          <h1 style={{ display: "inline-block", marginLeft: "10px" }}>
-            nice-react-layout
-          </h1>
-          <a
-            style={{ float: "right" }}
-            href="https://github.com/ekros/nice-react-layout"
+      <div style={styles.app}>
+        <div style={styles.scrollSpy}>
+          <ScrollspyNav
+            scrollTargetIds={[
+              "basic",
+              "nested-layouts",
+              "separator",
+              "panels-with-size",
+              "collapsible-sidebar",
+              "multiple-collapsible-panels",
+              "multi-column-panel",
+              "render-prop",
+              "drag-and-drop",
+              "dynamic-panels"
+            ]}
+            offset={100}
+            activeNavClass="is-active"
+            scrollDuration="500"
+            headerBackground="true"
           >
-            <img
-              style={styles.github}
-              src="https://github.com/favicon.ico"
-              alt="github"
-            />
-          </a>
-          <p>
-            A set of React components to create complex flexbox-based layouts
-            without knowing what flexbox is.
-          </p>
+            <ul style={styles.navList}>
+              <li>
+                <a href="#basic">Basic example</a>
+              </li>
+              <li>
+                <a href="#nested-layouts">Nested layouts</a>
+              </li>
+              <li>
+                <a href="#separator">Separator</a>
+              </li>
+              <li>
+                <a href="#panels-with-size">Panels with size</a>
+              </li>
+              <li>
+                <a href="#collapsible-sidebar">Collapsible sidebar</a>
+              </li>
+              <li>
+                <a href="#multiple-collapsible-panels">
+                  Multiple collapsible panels
+                </a>
+              </li>
+              <li>
+                <a href="#multi-column-panel">Multi-column panel</a>
+              </li>
+              <li>
+                <a href="#render-prop">Panels with render prop</a>
+              </li>
+              <li>
+                <a href="#drag-and-drop">Drag and drop panels</a>
+              </li>
+              <li>
+                <a href="#dynamic-panels">Dynamic panels</a>
+              </li>
+            </ul>
+          </ScrollspyNav>
         </div>
-        <br />
-        <div className="pt-card">
-          <h5>Basic example</h5>
-          <pre className="prettyprint">
-            {`
-            <HorizontalLayout mockup>
-              <Panel proportion={1} />
-              <Panel proportion={3}>Lorem ipsum...</Panel>
-            </HorizontalLayout>
-            `}
-          </pre>
-          <div style={styles.example}>
-            <HorizontalLayout mockup>
-              <Panel proportion={1} />
-              <Panel proportion={3}>
-                {mockupContent}
-                {mockupContent}
-                {mockupContent}
-              </Panel>
-            </HorizontalLayout>
-          </div>
-        </div>
-        <br />
-        <div className="pt-card">
-          <h5>Nested layouts</h5>
-          <pre className="prettyprint">
-            {`
-              <VerticalLayout mockup>
-                <Panel fixed fixedHeight={50} />
-                <Panel>
-                  <HorizontalLayout mockup>
-                    <Panel />
-                    <Panel proportion={3} />
-                  </HorizontalLayout>
-                </Panel>
-              </VerticalLayout>
-            `}
-          </pre>
-          <div style={styles.example}>
-            <VerticalLayout mockup>
-              <Panel fixed fixedHeight={50} />
-              <Panel>
+        <div style={styles.main}>
+          <div
+            style={{
+              display: "inline-block",
+              position: "relative",
+              width: "600px"
+            }}
+          >
+            <div style={{ width: "600px" }}>
+              <img src="./logo.png" />
+              <h1 style={{ display: "inline-block", marginLeft: "10px" }}>
+                nice-react-layout
+              </h1>
+              <a
+                style={{ float: "right" }}
+                href="https://github.com/ekros/nice-react-layout"
+              >
+                <img
+                  style={styles.github}
+                  src="https://github.com/favicon.ico"
+                  alt="github"
+                />
+              </a>
+              <p>
+                A set of React components to create complex flexbox-based
+                layouts without knowing what flexbox is.
+              </p>
+            </div>
+            <br />
+            <div id="basic" className="pt-card">
+              <h4>Basic example</h4>
+              <pre className="prettyprint">
+                {`
+  <HorizontalLayout mockup>
+    <Panel proportion={1} />
+    <Panel proportion={3}>Lorem ipsum...</Panel>
+  </HorizontalLayout>
+                  `}
+              </pre>
+              <div style={styles.example}>
                 <HorizontalLayout mockup>
-                  <Panel />
-                  <Panel proportion={3} />
-                </HorizontalLayout>
-              </Panel>
-            </VerticalLayout>
-          </div>
-        </div>
-        <br />
-        <div className="pt-card">
-          <h5>Separator</h5>
-          <h6>Horizontal</h6>
-          <pre className="prettyprint">
-            {`
-              <VerticalLayout mockup>
-                <Panel fixed fixedHeight={50} />
-                <Panel>
-                  <HorizontalLayout mockup>
-                    <Panel />
-                    <Separator />
-                    <Panel />
-                    <Panel fixed fixedWidth={100} />
-                  </HorizontalLayout>
-                </Panel>
-              </VerticalLayout>
-            `}
-          </pre>
-          <div style={styles.example}>
-            <VerticalLayout mockup>
-              <Panel fixed fixedHeight={50} />
-              <Panel>
-                <HorizontalLayout mockup>
-                  <Panel />
-                  <Separator />
-                  <Panel />
-                  <Panel fixed fixedWidth={100} />
-                </HorizontalLayout>
-              </Panel>
-            </VerticalLayout>
-          </div>
-          <h6>Vertical</h6>
-          <pre className="prettyprint">
-            {`
-              <VerticalLayout mockup>
-                <Panel fixed fixedHeight={50} />
-                <Panel>
-                  <VerticalLayout mockup>
-                    <Panel />
-                    <Separator />
-                    <Panel />
-                    <Panel fixed fixedHeight={100} />
-                  </VerticalLayout>
-                </Panel>
-              </VerticalLayout>
-            `}
-          </pre>
-          <div style={styles.example}>
-            <VerticalLayout mockup>
-              <Panel fixed fixedHeight={50} />
-              <Panel>
-                <VerticalLayout mockup>
-                  <Panel />
-                  <Separator />
-                  <Panel />
-                  <Panel fixed fixedHeight={100} />
-                </VerticalLayout>
-              </Panel>
-            </VerticalLayout>
-          </div>
-        </div>
-        <br />
-        <div className="pt-card">
-          <h5>Panels with size (drag separators to see it)</h5>
-          <pre className="prettyprint">
-            {`
-              <VerticalLayout mockup>
-                <Panel fixed fixedHeight={50} />
-                <Panel>
-                  <HorizontalLayout mockup>
-                    <Panel>
-                      <VerticalLayout mockup>
-                        <Panel showSize />
-                        <Separator />
-                        <Panel showSize />
-                      </VerticalLayout>
-                    </Panel>
-                    <Separator />
-                    <Panel showSize />
-                    <Panel fixed fixedWidth={100} />
-                  </HorizontalLayout>
-                </Panel>
-              </VerticalLayout>
-            `}
-          </pre>
-          <div style={styles.example}>
-            <VerticalLayout mockup>
-              <Panel fixed fixedHeight={50} />
-              <Panel>
-                <HorizontalLayout mockup>
-                  <Panel>
-                    <VerticalLayout mockup>
-                      <Panel showSize />
-                      <Separator />
-                      <Panel showSize />
-                    </VerticalLayout>
-                  </Panel>
-                  <Separator />
-                  <Panel showSize />
-                  <Panel fixed fixedWidth={100} />
-                </HorizontalLayout>
-              </Panel>
-            </VerticalLayout>
-          </div>
-        </div>
-        <br />
-        <div className="pt-card">
-          <h5>Collapsible sidebar</h5>
-          <pre className="prettyprint">
-            {`
-              <VerticalLayout mockup>
-                <Panel fixed fixedHeight={50} />
-                <Panel>
-                  <HorizontalLayout mockup>
-                    <Panel
-                      sidebar
-                      collapsible
-                      collapseButtonContent="<"
-                      collapseButtonCollapsedContent=">"
-                      collapseButtonStyle={{
-                        background: "white",
-                        border: "1px solid lightgray"
-                      }}
-                    />
-                    <Separator />
-                    <Panel proportion={3} />
-                  </HorizontalLayout>
-                </Panel>
-              </VerticalLayout>
-            `}
-          </pre>
-          <div style={styles.example}>
-            <VerticalLayout mockup>
-              <Panel fixed fixedHeight={50} />
-              <Panel>
-                <HorizontalLayout mockup>
-                  <Panel
-                    sidebar
-                    collapsible
-                    collapseButtonContent="<"
-                    collapseButtonCollapsedContent=">"
-                    collapseButtonStyle={{
-                      background: "white",
-                      border: "1px solid lightgray"
-                    }}
-                  />
-                  <Separator />
-                  <Panel proportion={3} />
-                </HorizontalLayout>
-              </Panel>
-            </VerticalLayout>
-          </div>
-        </div>
-        <br />
-        <div className="pt-card">
-          <h5>Multiple collapsible panels</h5>
-          <pre className="prettyprint">
-            {`
-              <VerticalLayout mockup>
-                <Panel fixed fixedHeight={50} />
-                <Panel>
-                  <HorizontalLayout mockup>
-                    <Panel
-                      sidebar
-                      collapsible
-                      collapseButtonContent="-"
-                      collapseButtonCollapsedContent="+"
-                      collapseButtonStyle={{
-                        background: "white",
-                        border: "1px solid lightgray"
-                      }}
-                    />
-                    <Panel
-                      sidebar
-                      collapsible
-                      collapseButtonContent="-"
-                      collapseButtonCollapsedContent="+"
-                      collapseButtonStyle={{
-                        background: "white",
-                        border: "1px solid lightgray"
-                      }}
-                    />
-                    <Panel
-                      sidebar
-                      collapsible
-                      collapseButtonContent="-"
-                      collapseButtonCollapsedContent="+"
-                      collapseButtonStyle={{
-                        background: "white",
-                        border: "1px solid lightgray"
-                      }}
-                    />
-                  </HorizontalLayout>
-                </Panel>
-              </VerticalLayout>
-            `}
-          </pre>
-          <div style={styles.example}>
-            <VerticalLayout mockup>
-              <Panel fixed fixedHeight={50} />
-              <Panel>
-                <HorizontalLayout mockup>
-                  <Panel
-                    sidebar
-                    collapsible
-                    collapseButtonContent="-"
-                    collapseButtonCollapsedContent="+"
-                    collapseButtonStyle={{
-                      background: "white",
-                      border: "1px solid lightgray"
-                    }}
-                  />
-                  <Panel
-                    sidebar
-                    collapsible
-                    collapseButtonContent="-"
-                    collapseButtonCollapsedContent="+"
-                    collapseButtonStyle={{
-                      background: "white",
-                      border: "1px solid lightgray"
-                    }}
-                  />
-                  <Panel
-                    sidebar
-                    collapsible
-                    collapseButtonContent="-"
-                    collapseButtonCollapsedContent="+"
-                    collapseButtonStyle={{
-                      background: "white",
-                      border: "1px solid lightgray"
-                    }}
-                  />
-                </HorizontalLayout>
-              </Panel>
-            </VerticalLayout>
-          </div>
-        </div>
-        <br />
-        <div className="pt-card">
-          <h5>Multi-column panel</h5>
-          Note you can pass a custom style using the customCss prop
-          <pre className="prettyprint">
-            {`
-              <VerticalLayout mockup>
-                <Panel fixed fixedHeight={50} />
-                <Panel>
-                  <HorizontalLayout mockup>
-                    <Panel />
-                    <Separator />
-                    <Panel
-                      columns={2}
-                      customCss={{
-                        columnRuleStyle: 'solid',
-                        columnRule: '2px solid gray' }}>
-                      Lorem ipsum...
-                    </Panel>
-                  </HorizontalLayout>
-                </Panel>
-              </VerticalLayout>
-            `}
-          </pre>
-          <div style={styles.example}>
-            <VerticalLayout mockup>
-              <Panel fixed fixedHeight={50} />
-              <Panel>
-                <HorizontalLayout mockup>
-                  <Panel />
-                  <Separator />
-                  <Panel
-                    columns={2}
-                    customCss={{
-                      columnRuleStyle: "solid",
-                      columnRule: "2px solid gray"
-                    }}
-                  >
+                  <Panel proportion={1} />
+                  <Panel proportion={3}>
+                    {mockupContent}
+                    {mockupContent}
                     {mockupContent}
                   </Panel>
                 </HorizontalLayout>
-              </Panel>
+              </div>
+            </div>
+            <br />
+            <div id="nested-layouts" className="pt-card">
+              <h4>Nested layouts</h4>
+              <pre className="prettyprint">
+                {`
+  <VerticalLayout mockup>
+    <Panel fixed fixedHeight={50} />
+    <Panel>
+      <HorizontalLayout mockup>
+        <Panel />
+        <Panel proportion={3} />
+      </HorizontalLayout>
+    </Panel>
+  </VerticalLayout>
+                    `}
+              </pre>
+              <div style={styles.example}>
+                <VerticalLayout mockup>
+                  <Panel fixed fixedHeight={50} />
+                  <Panel>
+                    <HorizontalLayout mockup>
+                      <Panel />
+                      <Panel proportion={3} />
+                    </HorizontalLayout>
+                  </Panel>
+                </VerticalLayout>
+              </div>
+            </div>
+            <br />
+            <div id="separator" className="pt-card">
+              <h4>Separator</h4>
+              <h6>Horizontal</h6>
+              <pre className="prettyprint">
+                {`
+  <VerticalLayout mockup>
+    <Panel fixed fixedHeight={50} />
+    <Panel>
+      <HorizontalLayout mockup>
+        <Panel />
+        <Separator />
+        <Panel />
+        <Panel fixed fixedWidth={100} />
+      </HorizontalLayout>
+    </Panel>
+  </VerticalLayout>
+                      `}
+              </pre>
+              <div style={styles.example}>
+                <VerticalLayout mockup>
+                  <Panel fixed fixedHeight={50} />
+                  <Panel>
+                    <HorizontalLayout mockup>
+                      <Panel />
+                      <Separator />
+                      <Panel />
+                      <Panel fixed fixedWidth={100} />
+                    </HorizontalLayout>
+                  </Panel>
+                </VerticalLayout>
+              </div>
+              <h6>Vertical</h6>
+              <pre className="prettyprint">
+                {`
+  <VerticalLayout mockup>
+    <Panel fixed fixedHeight={50} />
+    <Panel>
+      <VerticalLayout mockup>
+        <Panel />
+        <Separator />
+        <Panel />
+        <Panel fixed fixedHeight={100} />
+      </VerticalLayout>
+    </Panel>
+  </VerticalLayout>
+                        `}
+              </pre>
+              <div style={styles.example}>
+                <VerticalLayout mockup>
+                  <Panel fixed fixedHeight={50} />
+                  <Panel>
+                    <VerticalLayout mockup>
+                      <Panel />
+                      <Separator />
+                      <Panel />
+                      <Panel fixed fixedHeight={100} />
+                    </VerticalLayout>
+                  </Panel>
+                </VerticalLayout>
+              </div>
+            </div>
+            <br />
+            <div id="panels-with-size" className="pt-card">
+              <h4>Panels with size (drag separators to see it)</h4>
+              <pre className="prettyprint">
+                {`
+  <VerticalLayout mockup>
+    <Panel fixed fixedHeight={50} />
+    <Panel>
+      <HorizontalLayout mockup>
+        <Panel>
+          <VerticalLayout mockup>
+            <Panel showSize />
+            <Separator />
+            <Panel showSize />
+          </VerticalLayout>
+        </Panel>
+        <Separator />
+        <Panel showSize />
+        <Panel fixed fixedWidth={100} />
+      </HorizontalLayout>
+    </Panel>
+  </VerticalLayout>
+                          `}
+              </pre>
+              <div style={styles.example}>
+                <VerticalLayout mockup>
+                  <Panel fixed fixedHeight={50} />
+                  <Panel>
+                    <HorizontalLayout mockup>
+                      <Panel>
+                        <VerticalLayout mockup>
+                          <Panel showSize />
+                          <Separator />
+                          <Panel showSize />
+                        </VerticalLayout>
+                      </Panel>
+                      <Separator />
+                      <Panel showSize />
+                      <Panel fixed fixedWidth={100} />
+                    </HorizontalLayout>
+                  </Panel>
+                </VerticalLayout>
+              </div>
+            </div>
+            <br />
+            <div id="collapsible-sidebar" className="pt-card">
+              <h4>Collapsible sidebar</h4>
+              <pre className="prettyprint">
+                {`
+  <VerticalLayout mockup>
+    <Panel fixed fixedHeight={50} />
+    <Panel>
+      <HorizontalLayout mockup>
+        <Panel
+          sidebar
+          collapsible
+          collapseButtonContent="<"
+          collapseButtonCollapsedContent=">"
+          collapseButtonStyle={{
+            background: "white",
+            border: "1px solid lightgray"
+          }}
+          />
+        <Separator />
+        <Panel proportion={3} />
+      </HorizontalLayout>
+    </Panel>
+  </VerticalLayout>
+                            `}
+              </pre>
+              <div style={styles.example}>
+                <VerticalLayout mockup>
+                  <Panel fixed fixedHeight={50} />
+                  <Panel>
+                    <HorizontalLayout mockup>
+                      <Panel
+                        sidebar
+                        collapsible
+                        collapseButtonContent="<"
+                        collapseButtonCollapsedContent=">"
+                        collapseButtonStyle={{
+                          background: "white",
+                          border: "1px solid lightgray"
+                        }}
+                      />
+                      <Separator />
+                      <Panel proportion={3} />
+                    </HorizontalLayout>
+                  </Panel>
+                </VerticalLayout>
+              </div>
+            </div>
+            <br />
+            <div id="multiple-collapsible-panels" className="pt-card">
+              <h4>Multiple collapsible panels</h4>
+              <pre className="prettyprint">
+                {`
+  <VerticalLayout mockup>
+    <Panel fixed fixedHeight={50} />
+    <Panel>
+      <HorizontalLayout mockup>
+        <Panel
+          sidebar
+          collapsible
+          collapseButtonContent="-"
+          collapseButtonCollapsedContent="+"
+          collapseButtonStyle={{
+            background: "white",
+            border: "1px solid lightgray"
+          }}
+          />
+        <Panel
+          sidebar
+          collapsible
+          collapseButtonContent="-"
+          collapseButtonCollapsedContent="+"
+          collapseButtonStyle={{
+            background: "white",
+            border: "1px solid lightgray"
+          }}
+          />
+        <Panel
+          sidebar
+          collapsible
+          collapseButtonContent="-"
+          collapseButtonCollapsedContent="+"
+          collapseButtonStyle={{
+            background: "white",
+            border: "1px solid lightgray"
+          }}
+          />
+      </HorizontalLayout>
+    </Panel>
+  </VerticalLayout>
+                              `}
+              </pre>
+              <div style={styles.example}>
+                <VerticalLayout mockup>
+                  <Panel fixed fixedHeight={50} />
+                  <Panel>
+                    <HorizontalLayout mockup>
+                      <Panel
+                        sidebar
+                        collapsible
+                        collapseButtonContent="-"
+                        collapseButtonCollapsedContent="+"
+                        collapseButtonStyle={{
+                          background: "white",
+                          border: "1px solid lightgray"
+                        }}
+                      />
+                      <Panel
+                        sidebar
+                        collapsible
+                        collapseButtonContent="-"
+                        collapseButtonCollapsedContent="+"
+                        collapseButtonStyle={{
+                          background: "white",
+                          border: "1px solid lightgray"
+                        }}
+                      />
+                      <Panel
+                        sidebar
+                        collapsible
+                        collapseButtonContent="-"
+                        collapseButtonCollapsedContent="+"
+                        collapseButtonStyle={{
+                          background: "white",
+                          border: "1px solid lightgray"
+                        }}
+                      />
+                    </HorizontalLayout>
+                  </Panel>
+                </VerticalLayout>
+              </div>
+            </div>
+            <br />
+            <div id="multi-column-panel" className="pt-card">
+              <h4>Multi-column panel</h4>
+              Note you can pass a custom style using the customCss prop
+              <pre className="prettyprint">
+                {`
+  <VerticalLayout mockup>
+    <Panel fixed fixedHeight={50} />
+    <Panel>
+      <HorizontalLayout mockup>
+        <Panel />
+        <Separator />
+        <Panel
+          columns={2}
+          customCss={{
+            columnRuleStyle: 'solid',
+            columnRule: '2px solid gray' }}>
+            Lorem ipsum...
+          </Panel>
+        </HorizontalLayout>
+      </Panel>
+    </VerticalLayout>
+                                  `}
+              </pre>
+              <div style={styles.example}>
+                <VerticalLayout mockup>
+                  <Panel fixed fixedHeight={50} />
+                  <Panel>
+                    <HorizontalLayout mockup>
+                      <Panel />
+                      <Separator />
+                      <Panel
+                        columns={2}
+                        customCss={{
+                          columnRuleStyle: "solid",
+                          columnRule: "2px solid gray"
+                        }}
+                      >
+                        {mockupContent}
+                      </Panel>
+                    </HorizontalLayout>
+                  </Panel>
+                </VerticalLayout>
+              </div>
+            </div>
+            <br />
+            <div id="render-prop" className="pt-card">
+              <h4>Panels with render prop</h4>
+              In this example, we use the panel size to change its background
+              <pre className="prettyprint">
+                {`
+  <VerticalLayout mockup>
+    <Panel fixed fixedHeight={50} />
+    <Panel>
+      <HorizontalLayout mockup>
+        <Panel>
+          <VerticalLayout mockup>
+            <Panel
+              render={({ size }) => (
+                <div
+                  style={{
+                    position: "absolute",
+                    color: "white",
+                    width: "100%",
+                    height: "100%",
+                    lineHeight: \`\${size.height}px\`,
+                    background: \`rgb(0, \${size.width /
+                      4}, \${size.height / 4})\`,
+                      textAlign: "center"
+                    }}
+                    >
+                    Resize me
+                  </div>
+                )}
+                />
+              <Separator />
+              <Panel />
             </VerticalLayout>
-          </div>
-        </div>
-        <br />
-        <div className="pt-card">
-          <h5>Panels with render prop</h5>
-          In this example, we use the panel size to change its background
-          <pre className="prettyprint">
-            {`
-              <VerticalLayout mockup>
-                <Panel fixed fixedHeight={50} />
-                <Panel>
-                  <HorizontalLayout mockup>
-                    <Panel>
-                      <VerticalLayout mockup>
-                        <Panel
-                          render={({ size }) => (
-                            <div
-                              style={{
-                                position: "absolute",
-                                color: "white",
-                                width: "100%",
-                                height: "100%",
-                                lineHeight: \`\${size.height}px\`,
-                                background: \`rgb(0, \${size.width /
-                                  4}, \${size.height / 4})\`,
+          </Panel>
+          <Separator />
+          <Panel />
+        </HorizontalLayout>
+      </Panel>
+    </VerticalLayout>
+                                      `}
+              </pre>
+              <div style={styles.example}>
+                <VerticalLayout mockup>
+                  <Panel fixed fixedHeight={50} />
+                  <Panel>
+                    <HorizontalLayout mockup>
+                      <Panel>
+                        <VerticalLayout mockup>
+                          <Panel
+                            render={({ size }) => (
+                              <div
+                                style={{
+                                  position: "absolute",
+                                  color: "white",
+                                  width: "100%",
+                                  height: "100%",
+                                  lineHeight: `${size.height}px`,
+                                  background: `rgb(0, ${size.width /
+                                    4}, ${size.height / 4})`,
                                   textAlign: "center"
                                 }}
-                                >
+                              >
                                 Resize me
                               </div>
                             )}
-                            />
-                        <Separator />
-                        <Panel />
-                      </VerticalLayout>
-                    </Panel>
-                    <Separator />
-                    <Panel />
-                  </HorizontalLayout>
-                </Panel>
-              </VerticalLayout>
-              `}
-          </pre>
-          <div style={styles.example}>
-            <VerticalLayout mockup>
-              <Panel fixed fixedHeight={50} />
-              <Panel>
-                <HorizontalLayout mockup>
-                  <Panel>
-                    <VerticalLayout mockup>
-                      <Panel
-                        render={({ size }) => (
-                          <div
-                            style={{
-                              position: "absolute",
-                              color: "white",
-                              width: "100%",
-                              height: "100%",
-                              lineHeight: `${size.height}px`,
-                              background: `rgb(0, ${size.width /
-                                4}, ${size.height / 4})`,
-                              textAlign: "center"
-                            }}
-                          >
-                            Resize me
-                          </div>
-                        )}
-                      />
+                          />
+                          <Separator />
+                          <Panel />
+                        </VerticalLayout>
+                      </Panel>
                       <Separator />
                       <Panel />
-                    </VerticalLayout>
+                    </HorizontalLayout>
                   </Panel>
-                  <Separator />
-                  <Panel />
-                </HorizontalLayout>
-              </Panel>
-            </VerticalLayout>
-          </div>
-        </div>
-        <br />
-        <div className="pt-card">
-          <h5>Drag and drop panels</h5>
-          Note: only works on panels in the same layout
-          <pre className="prettyprint">
-            {`
-              <HorizontalLayout
-                customCss={{
-                  width: "600px",
-                  overflow: "hidden",
-                  flexWrap: "wrap"
-                }}
-              >
-                <Panel
+                </VerticalLayout>
+              </div>
+            </div>
+            <br />
+            <div id="drag-and-drop" className="pt-card">
+              <h4>Drag and drop panels</h4>
+              Note: only works on panels in the same layout
+              <pre className="prettyprint">
+                {`
+  <HorizontalLayout
+    customCss={{
+      width: "600px",
+      overflow: "hidden",
+      flexWrap: "wrap"
+    }}
+    >
+    <Panel
+      customCss={{
+        backgroundImage: url(http://placekitten.com/301/202),
+        backgroundPosition: "center",
+        flex: "0 0 200px",
+        flexWrap: "wrap",
+        height: "200px",
+        overflow: "hidden"
+      }}
+      draggable
+      droppable
+      proportion={proportion}
+      render={({ size }) => (
+        <div style={{ width: "100%", height: "100%" }} />
+      )}
+      />
+    ...
+  </HorizontalLayout>
+                                          `}
+              </pre>
+              <h6>
+                Images provided by{" "}
+                <a
+                  href="http://placekitten.com/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  placekitten
+                </a>
+              </h6>
+              <div style={styles.example}>
+                <HorizontalLayout
                   customCss={{
-                    backgroundImage: url(http://placekitten.com/301/202),
-                    backgroundPosition: "center",
-                    flex: "0 0 200px",
-                    flexWrap: "wrap",
-                    height: "200px",
-                    overflow: "hidden"
+                    width: "600px",
+                    overflow: "hidden",
+                    flexWrap: "wrap"
                   }}
-                  draggable
-                  droppable
-                  proportion={proportion}
-                  render={({ size }) => (
-                    <div style={{ width: "100%", height: "100%" }} />
-                  )}
-                />
-                ...
-              </HorizontalLayout>
-              `}
-          </pre>
-          <h6>
-            Images provided by{" "}
-            <a
-              href="http://placekitten.com/"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              placekitten
-            </a>
-          </h6>
-          <div style={styles.example}>
-            <HorizontalLayout
-              customCss={{
-                width: "600px",
-                overflow: "hidden",
-                flexWrap: "wrap"
-              }}
-            >
-              {catPanel(0, 0)}
-              {catPanel(0, 1)}
-              {catPanel(0, 2)}
-              {catPanel(0, 3)}
-              {catPanel(0, 4)}
-              {catPanel(0, 5)}
-            </HorizontalLayout>
-          </div>
-        </div>
-        <br />
-        <div className="pt-card">
-          <h5>Drag and drop - 2</h5>
-          <pre className="prettyprint">
-            {`
-              <HorizontalLayout
-                mockup
-                customCss={{
-                  width: "600px",
-                  overflow: "hidden",
-                  flexWrap: "wrap"
-                }}
-              >
-                <Panel draggable droppable centered>
-                  Drag and drop!
-                </Panel>
-                <Panel draggable droppable centered>
-                  Drag and drop!
-                </Panel>
-                <Panel proportion={2} draggable centered>
-                  Only drag
-                </Panel>
-                <Panel droppable centered>
-                  Only drop
-                </Panel>
-              </HorizontalLayout>
-            `}
-          </pre>
-          <div style={styles.example}>
-            <HorizontalLayout
-              mockup
-              customCss={{
-                width: "600px",
-                overflow: "hidden",
-                flexWrap: "wrap"
-              }}
-            >
-              <Panel draggable droppable centered>
-                Drag and drop!
-              </Panel>
-              <Panel draggable droppable centered>
-                Drag and drop!
-              </Panel>
-              <Panel proportion={2} draggable centered>
-                Only drag
-              </Panel>
-              <Panel droppable centered>
-                Only drop
-              </Panel>
-            </HorizontalLayout>
-          </div>
-        </div>
-        <div className="pt-card">
-          <h5>Dynamic panels</h5>
-          <button onClick={this.addSmallPanel}>Add SMALL panel</button>
-          <button onClick={this.addBigPanel}>Add BIG panel</button>
-          <button onClick={this.removePanel}>Remove panel</button>
-          <div style={styles.example}>
-            <HorizontalLayout
-              mockup
-              customCss={{
-                width: "600px",
-                overflow: "hidden",
-                flexWrap: "wrap"
-              }}
-            >
-              {dynamicPanels &&
-                dynamicPanels.map((p, index) => (
-                  <Panel
-                    key={index}
-                    proportion={(p && p.proportion) || undefined}
-                    draggable
-                    droppable
-                  />
-                ))}
-            </HorizontalLayout>
+                >
+                  {catPanel(0, 0)}
+                  {catPanel(0, 1)}
+                  {catPanel(0, 2)}
+                  {catPanel(0, 3)}
+                  {catPanel(0, 4)}
+                  {catPanel(0, 5)}
+                </HorizontalLayout>
+              </div>
+            </div>
+            <br />
+            <div id="dynamic-panels" className="pt-card">
+              <h4>Drag and drop - 2</h4>
+              <pre className="prettyprint">
+                {`
+  <HorizontalLayout
+    mockup
+    customCss={{
+      width: "600px",
+      overflow: "hidden",
+      flexWrap: "wrap"
+    }}
+    >
+    <Panel draggable droppable centered>
+      Drag and drop!
+    </Panel>
+    <Panel draggable droppable centered>
+      Drag and drop!
+    </Panel>
+    <Panel proportion={2} draggable centered>
+      Only drag
+    </Panel>
+    <Panel droppable centered>
+      Only drop
+    </Panel>
+  </HorizontalLayout>
+                                            `}
+              </pre>
+              <div style={styles.example}>
+                <HorizontalLayout
+                  mockup
+                  customCss={{
+                    width: "600px",
+                    overflow: "hidden",
+                    flexWrap: "wrap"
+                  }}
+                >
+                  <Panel draggable droppable centered>
+                    Drag and drop!
+                  </Panel>
+                  <Panel draggable droppable centered>
+                    Drag and drop!
+                  </Panel>
+                  <Panel proportion={2} draggable centered>
+                    Only drag
+                  </Panel>
+                  <Panel droppable centered>
+                    Only drop
+                  </Panel>
+                </HorizontalLayout>
+              </div>
+            </div>
+            <div className="pt-card">
+              <h4>Dynamic panels</h4>
+              <button onClick={this.addSmallPanel}>Add SMALL panel</button>
+              <button onClick={this.addBigPanel}>Add BIG panel</button>
+              <button onClick={this.removePanel}>Remove panel</button>
+              <div style={styles.example}>
+                <HorizontalLayout
+                  mockup
+                  customCss={{
+                    width: "600px",
+                    overflow: "hidden",
+                    flexWrap: "wrap"
+                  }}
+                >
+                  {dynamicPanels &&
+                    dynamicPanels.map((p, index) => (
+                      <Panel
+                        key={index}
+                        proportion={(p && p.proportion) || undefined}
+                        draggable
+                        droppable
+                      />
+                    ))}
+                </HorizontalLayout>
+              </div>
+            </div>
           </div>
         </div>
       </div>

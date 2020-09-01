@@ -17,6 +17,7 @@
   "license": "MIT",
   "dependencies": {
     "gh-pages": "^1.1.0",
+    "react-scrollspy-nav": "^1.2.4",
     "react-sizeme": "^2.5.2",
     "underscore": "^1.9.1"
   },
