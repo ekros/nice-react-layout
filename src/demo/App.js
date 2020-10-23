@@ -7,6 +7,7 @@ import {
   Separator
 } from "../lib/components/Layout";
 import "./App.css";
+import version from "../version.json";
 
 const mockupContent = (
   <p>
@@ -208,6 +209,7 @@ class App extends Component {
               <img src="./logo.png" />
               <h1 style={{ display: "inline-block", marginLeft: "10px" }}>
                 nice-react-layout
+                <small style={{ marginLeft: "20px" }}>{version.number}</small>
               </h1>
               <a
                 style={{ float: "right" }}
