@@ -79,13 +79,13 @@ export default class Layout extends React.Component {
       totalFixedWidth,
       totalFixedHeight,
       totalSpacerSize
-    }
+    };
   }
 
   componentDidUpdate(prevProps, prevState, snapshot) {
     let layoutInfo = Layout.calculateLayout(this.props);
     if (layoutInfo.layout.length !== prevState.layout.length) {
-      this.setState({...layoutInfo});
+      this.setState({ ...layoutInfo });
     }
   }
 
@@ -335,10 +335,10 @@ export default class Layout extends React.Component {
             layoutIndex: panelIndex,
             mockupStyle: mockup
               ? {
-                background: this.mockupColors[
-                this.mockupColors.length - index
+                  background: this.mockupColors[
+                    this.mockupColors.length - index
                   ]
-              }
+                }
               : null,
             order: layoutOrdering[index],
             orientation,
@@ -352,7 +352,35 @@ export default class Layout extends React.Component {
           orientation
         });
       } else {
-        child = c;
+        if (orientation === "vertical") {
+          child = React.cloneElement(c, {
+            niceReactLayoutProps: {
+              layoutIndex: panelIndex,
+              mockupStyle: mockup
+                ? {
+                    background: this.mockupColors[
+                      this.mockupColors.length - index
+                    ]
+                  }
+                : null,
+              orientation
+            }
+          });
+        } else {
+          child = React.cloneElement(c, {
+            niceReactLayoutProps: {
+              layoutIndex: panelIndex,
+              mockupStyle: mockup
+                ? {
+                    background: this.mockupColors[
+                      this.mockupColors.length - index
+                    ]
+                  }
+                : null,
+              orientation
+            }
+          });
+        }
       }
       return child;
     });

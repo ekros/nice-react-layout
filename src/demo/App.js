@@ -55,6 +55,21 @@ const catPanel = (proportion, imageIndex) => (
   />
 );
 
+const Header = ({ backgroundColor, message, niceReactLayoutProps }) => (
+  <div style={{ backgroundColor, flex: "0 0 40px" }}>{message}</div>
+);
+
+const CustomPanel = ({ children, niceReactLayoutProps: { mockupStyle } }) => (
+  <div
+    style={{
+      backgroundColor: (mockupStyle && mockupStyle.background) || "black",
+      flex: "3"
+    }}
+  >
+    {children}
+  </div>
+);
+
 class App extends Component {
   constructor(props) {
     super(props);
@@ -154,7 +169,8 @@ class App extends Component {
               "multi-column-panel",
               "render-prop",
               "drag-and-drop",
-              "dynamic-panels"
+              "dynamic-panels",
+              "custom-panels"
             ]}
             offset={100}
             activeNavClass="is-active"
@@ -193,6 +209,9 @@ class App extends Component {
               </li>
               <li>
                 <a href="#dynamic-panels">Dynamic panels</a>
+              </li>
+              <li>
+                <a href="#custom-panels">Custom panels</a>
               </li>
             </ul>
           </ScrollspyNav>
@@ -772,6 +791,72 @@ class App extends Component {
                       />
                     ))}
                 </HorizontalLayout>
+              </div>
+            </div>
+            <div id="custom-panels" className="pt-card">
+              <h4>
+                Custom panel components <b>(EXPERIMENTAL)</b>
+              </h4>
+              <p>
+                Instead of using the Panel component, you can use your own
+                component (<b>Header</b> and <b>CustomPanel</b> are
+                user-created)
+              </p>
+              <p>
+                It will receive a niceReactLayoutProps prop with (almost) all
+                you need to make it work as a normal panel.
+              </p>
+              <pre className="prettyprint">
+                {`
+  <VerticalLayout mockup>
+    <Header
+      backgroundColor="crimson"
+      message={"I'm a custom header"}
+    />
+    <Panel>
+      <HorizontalLayout mockup>
+        <Panel
+          sidebar
+          collapsible
+          collapseButtonContent="<"
+          collapseButtonCollapsedContent=">"
+          collapseButtonStyle={{
+            background: "white",
+            border: "1px solid lightgray"
+          }}
+        />
+      <CustomPanel>I'm a custom panel and I'm getting the mockup
+        background color as a prop.</CustomPanel>
+      </HorizontalLayout>
+    </Panel>
+  </VerticalLayout>
+       `}
+              </pre>
+              <div style={styles.example}>
+                <VerticalLayout mockup>
+                  <Header
+                    backgroundColor="crimson"
+                    message={"I'm a custom header"}
+                  />
+                  <Panel>
+                    <HorizontalLayout mockup>
+                      <Panel
+                        sidebar
+                        collapsible
+                        collapseButtonContent="<"
+                        collapseButtonCollapsedContent=">"
+                        collapseButtonStyle={{
+                          background: "white",
+                          border: "1px solid lightgray"
+                        }}
+                      />
+                      <CustomPanel>
+                        I'm a custom panel and I'm getting the mockup background
+                        color as a prop.
+                      </CustomPanel>
+                    </HorizontalLayout>
+                  </Panel>
+                </VerticalLayout>
               </div>
             </div>
           </div>
